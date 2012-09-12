@@ -17,13 +17,13 @@ public class KitExecutor implements CommandExecutor {
     private static final ItemStack[] KIT_1 = {
             new ItemStack(Material.WOOD_SWORD),
             new ItemStack(Material.COMPASS),
-            new ItemStack(Material.SANDSTONE, 1, 1),
+            new ItemStack(Material.SANDSTONE, 1, (short)1),
             new ItemStack(Material.SIGN), new ItemStack(Material.WOOD_PICKAXE) };
 
     private static final ItemStack[] KIT_2 = {
             new ItemStack(Material.WOOD_SWORD),
             new ItemStack(Material.COMPASS),
-            new ItemStack(Material.SANDSTONE, 1, 1) };
+            new ItemStack(Material.SANDSTONE, 1, (short)1) };
 
     public KitExecutor(Frenz me) {
         this.me = me;
@@ -49,7 +49,7 @@ public class KitExecutor implements CommandExecutor {
                 }
                 if (command.getName().equalsIgnoreCase("a3")) {
                     player.getInventory().addItem(
-                            new ItemStack[] { new ItemStack(373, 64, 8259) });
+                            new ItemStack[] { new ItemStack(373, 64, (short)8259) });
                     player.updateInventory();
                     player.sendMessage(ChatColor.BLUE + "Use them well.");
                     return true;

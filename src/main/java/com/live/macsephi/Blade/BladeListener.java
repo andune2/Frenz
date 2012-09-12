@@ -31,7 +31,6 @@ public class BladeListener implements Listener {
         if ((event.getEntity() instanceof EnderDragonPart))
             return;
         int damage;
-        int damage;
         if ((event.getDamager() instanceof Player)) {
             Player attacker = (Player) event.getDamager();
             damage = getNewDamage(event.getDamage(), attacker);

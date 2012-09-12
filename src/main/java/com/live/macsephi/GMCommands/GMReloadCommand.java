@@ -1,19 +1,16 @@
 package com.live.macsephi.GMCommands;
 
-import java.util.logging.Logger;
-import org.anjocaido.groupmanager.GroupManager;
-import org.anjocaido.groupmanager.dataholder.worlds.WorldsHolder;
-import org.bukkit.ChatColor;
-import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.PluginManager;
 
 import com.live.macsephi.Frenz;
 
 public class GMReloadCommand implements CommandExecutor {
+    /* Commented out to drop GroupManager dependency - is this needed anymore?
+     * morganm 9/11/12
+     * 
+     * 
     private GroupManager gm;
     private WorldsHolder holder;
     private Frenz me;
@@ -43,6 +40,13 @@ public class GMReloadCommand implements CommandExecutor {
             Frenz.log.info("[MobEffects] GroupManager has been reloaded.");
             return true;
         }
+        return false;
+    }
+    */
+
+    // do nothing stubs
+    public GMReloadCommand(Frenz me) {}
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         return false;
     }
 }

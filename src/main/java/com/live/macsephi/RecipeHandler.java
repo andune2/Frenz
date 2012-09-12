@@ -30,12 +30,12 @@ public class RecipeHandler implements Listener {
                 Material.getMaterial(368));
         this.server.addRecipe(r);
 
-        r = new ShapelessRecipe(new ItemStack(Material.SMOOTH_BRICK, 1, 2));
+        r = new ShapelessRecipe(new ItemStack(Material.SMOOTH_BRICK, 1, (short)2));
         r.addIngredient(Material.WOOD_AXE, 50).addIngredient(
                 Material.SMOOTH_BRICK);
         this.server.addRecipe(r);
 
-        r = new ShapelessRecipe(new ItemStack(Material.WOOD_AXE, 4, 50));
+        r = new ShapelessRecipe(new ItemStack(Material.WOOD_AXE, 4, (short)50));
         r.addIngredient(Material.WOOD_AXE);
         this.server.addRecipe(r);
 
@@ -61,7 +61,7 @@ public class RecipeHandler implements Listener {
                 .addIngredient(Material.VINE);
         this.server.addRecipe(r);
 
-        r = new ShapelessRecipe(new ItemStack(Material.INK_SACK, 1, 3));
+        r = new ShapelessRecipe(new ItemStack(Material.INK_SACK, 1, (short)3));
         r.addIngredient(Material.SUGAR).addIngredient(Material.DIRT)
                 .addIngredient(Material.SUGAR);
         this.server.addRecipe(r);
@@ -127,7 +127,7 @@ public class RecipeHandler implements Listener {
         s.shape(new String[] { "WWW", "WFW", "WWW" });
         this.server.addRecipe(s);
 
-        s = new ShapedRecipe(new ItemStack(Material.SMOOTH_BRICK, 8, 3));
+        s = new ShapedRecipe(new ItemStack(Material.SMOOTH_BRICK, 8, (short)3));
         s.setIngredient('B', Material.SMOOTH_BRICK, 2);
         s.setIngredient('D', Material.DIAMOND);
         s.shape(new String[] { "BBB", "BDB", "BBB" });
@@ -193,7 +193,7 @@ public class RecipeHandler implements Listener {
         s.shape(new String[] { "SSS", "SMS", "SSS" });
         this.server.addRecipe(s);
 
-        s = new ShapedRecipe(new ItemStack(Material.SMOOTH_BRICK, 3, 1));
+        s = new ShapedRecipe(new ItemStack(Material.SMOOTH_BRICK, 3, (short)1));
         s.setIngredient('V', Material.VINE);
         s.setIngredient('S', Material.SMOOTH_BRICK);
         s.setIngredient('G', Material.GRASS);
@@ -244,16 +244,16 @@ public class RecipeHandler implements Listener {
 
             switch (furnace.getInventory().getSmelting().getTypeId()) {
             case 87:
-                furnace.setCookTime(5);
+                furnace.setCookTime((short)5);
                 break;
             case 119:
-                furnace.setCookTime(14400);
+                furnace.setCookTime((short)14400);
                 break;
             case 122:
-                furnace.setCookTime(32767);
+                furnace.setCookTime((short)32767);
                 break;
             case 19:
-                furnace.setCookTime(30);
+                furnace.setCookTime((short)30);
             }
         }
     }

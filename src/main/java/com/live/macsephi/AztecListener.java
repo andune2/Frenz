@@ -100,8 +100,8 @@ public class AztecListener implements Listener {
             if ((event.getItem() != null)
                     && (event.getItem().getTypeId() == 323)
                     && (event.getClickedBlock().getType() == Material.CHEST)) {
-                event.setUseInteractedBlock(Event.Result.DENY);
-                event.setUseItemInHand(Event.Result.DENY);
+                event.setUseInteractedBlock(PlayerInteractEvent.Result.DENY);
+                event.setUseItemInHand(PlayerInteractEvent.Result.DENY);
                 event.setCancelled(true);
                 event.getPlayer()
                         .sendMessage(
@@ -130,13 +130,13 @@ public class AztecListener implements Listener {
                         .equalsIgnoreCase("aztec"))
                         && ((event.getMaterial() == Material.LAVA_BUCKET) || (event
                                 .getItem().getType() == Material.LAVA_BUCKET))) {
-                    event.setUseItemInHand(Event.Result.DENY);
+                    event.setUseItemInHand(PlayerInteractEvent.Result.DENY);
                     event.setCancelled(true);
                 }
 
                 if ((event.getMaterial() == Material.MONSTER_EGG)
                         || (event.getItem().getType() == Material.MONSTER_EGG)) {
-                    event.setUseItemInHand(Event.Result.DENY);
+                    event.setUseItemInHand(PlayerInteractEvent.Result.DENY);
                     event.setCancelled(true);
                     event.getPlayer()
                             .sendMessage(

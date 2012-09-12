@@ -1,32 +1,21 @@
 package com.live.macsephi;
 
-import java.util.ArrayList;
-import net.citizensnpcs.api.CitizensManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.Server;
-import org.bukkit.World;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowman;
-import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.EntityBlockFormEvent;
 import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginManager;
 
 public class MEListener implements Listener {
     private final Frenz me;
@@ -43,7 +32,7 @@ public class MEListener implements Listener {
             return;
         if ((event.getMaterial() == Material.FIREBALL)
                 || (event.getItem().getTypeId() == 385)) {
-            event.setUseItemInHand(Event.Result.DENY);
+            event.setUseItemInHand(PlayerInteractEvent.Result.DENY);
             event.setCancelled(true);
         }
     }
@@ -84,8 +73,11 @@ public class MEListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onCreatureSpawn(CreatureSpawnEvent event) {
         String world = event.getEntity().getWorld().getName();
-        switch ($SWITCH_TABLE$org$bukkit$entity$EntityType()[event
-                .getEntityType().ordinal()]) {
+        
+        // TODO: this should be converted to ENUM values and
+        // not use the ordinal values. Just fixing compile
+        // errors for now. - morganm 9/11/12
+        switch (event.getEntityType().ordinal()) {
         case 37:
             if (this.me.config.getBoolean("EnabledMobs." + world + ".Ocelot"))
                 break;
@@ -242,8 +234,10 @@ public class MEListener implements Listener {
             return;
         }
 
-        switch ($SWITCH_TABLE$org$bukkit$event$entity$EntityDamageEvent$DamageCause()[player
-                .getLastDamageCause().getCause().ordinal()]) {
+        // TODO: this should be converted to ENUM values and
+        // not use the ordinal values. Just fixing compile
+        // errors for now. - morganm 9/11/12
+        switch (event.getEntityType().ordinal()) {
         case 11:
         case 12:
             if (!this.me.config.getBoolean("DeathMessages.Explosion.Enabled"))
@@ -331,12 +325,14 @@ public class MEListener implements Listener {
         }
     }
 
+    /* Removing CitizensManager dependency for now. -morganm 9/11/12
     @EventHandler(ignoreCancelled = true)
     public void onGuardDamage(EntityDamageEvent event) {
         if ((this.me.getServer().getPluginManager().getPlugin("Citizens") != null)
                 && (CitizensManager.isNPC(event.getEntity())))
             event.setCancelled(true);
     }
+    */
 
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onEnchant(EnchantItemEvent event) {
