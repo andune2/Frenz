@@ -143,12 +143,10 @@ public class Frenz extends JavaPlugin {
 
             getCommand("canido").setExecutor(new CanIDoCommand(this));
             getCommand("tprandom").setExecutor(new TPRandomCommand(this));
-            getCommand("sacredwool").setExecutor(
-                    new SacredWoolCommand(this, this.config));
+            getCommand("sacredwool").setExecutor(new SacredWoolCommand(this, this.config));
             getCommand("shutup").setExecutor(new ShutUpCommand(this));
             getCommand("distort").setExecutor(new DistortCommand(this));
-            getCommand("superdistort").setExecutor(
-                    new SuperDistortCommand(this));
+            getCommand("superdistort").setExecutor(new SuperDistortCommand(this));
             getCommand("emosuicide").setExecutor(new EmoSuicideCommand(this));
             getCommand("slice").setExecutor(new SliceCommand(this));
             getCommand("curse").setExecutor(new CurseCommand(this));
@@ -156,10 +154,8 @@ public class Frenz extends JavaPlugin {
             getCommand("curemore").setExecutor(new CureMoreCommand(this));
             getCommand("fullrestore").setExecutor(new FullRestoreCommand(this));
             getCommand("carveblade").setExecutor(new CarveBladeCommand(this));
-            getCommand("sharpenblade").setExecutor(
-                    new SharpenBladeCommand(this));
-            getCommand("serrateblade").setExecutor(
-                    new SerrateBladeCommand(this));
+            getCommand("sharpenblade").setExecutor(new SharpenBladeCommand(this));
+            getCommand("serrateblade").setExecutor(new SerrateBladeCommand(this));
             getCommand("extendblade").setExecutor(new ExtendBladeCommand(this));
             getCommand("temperblade").setExecutor(new TemperBladeCommand(this));
             getCommand("divineblade").setExecutor(new DivineBladeCommand(this));
@@ -182,10 +178,8 @@ public class Frenz extends JavaPlugin {
             getCommand("stoneshield").setExecutor(new StoneShieldCommand(this));
             getCommand("goldshield").setExecutor(new GoldShieldCommand(this));
             getCommand("ironshield").setExecutor(new IronShieldCommand(this));
-            getCommand("diamondshield").setExecutor(
-                    new DiamondShieldCommand(this));
-            getCommand("obsidianshield").setExecutor(
-                    new ObsidianShieldCommand(this));
+            getCommand("diamondshield").setExecutor(new DiamondShieldCommand(this));
+            getCommand("obsidianshield").setExecutor(new ObsidianShieldCommand(this));
             getCommand("deathblade").setExecutor(new DeathBladeCommand(this));
             getCommand("reloadme").setExecutor(new ReloadMeCommand(this));
             getCommand("food").setExecutor(new FoodCommand(this));
