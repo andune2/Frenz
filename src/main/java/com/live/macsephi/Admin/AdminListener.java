@@ -18,45 +18,47 @@ import org.bukkit.plugin.PluginManager;
 
 import com.live.macsephi.Frenz;
 
-public class AdminListener
-  implements Listener
-{
-  private final Frenz me;
+public class AdminListener implements Listener {
+    private final Frenz me;
 
-  public AdminListener(Frenz me, FileConfiguration config)
-  {
-    this.me = me;
-  }
-  @EventHandler(priority=EventPriority.LOWEST, ignoreCancelled=true)
-  public void onPlayerChat(PlayerChatEvent event) {
-    if (this.me.isMuted.contains(event.getPlayer())) event.setCancelled(true); 
-  }
-
-  @EventHandler(priority=EventPriority.LOWEST, ignoreCancelled=true)
-  public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
-    if ((event.getMessage().startsWith("/me ")) && (this.me.isMuted.contains(event.getPlayer()))) event.setCancelled(true); 
-  }
-
-  @EventHandler(priority=EventPriority.HIGHEST)
-  public void onEntityExplode(EntityExplodeEvent event) {
-    if ((event.getEntity() instanceof TNTPrimed)) {
-      TNTPrimed thingy = (TNTPrimed)event.getEntity();
-      if (this.me.tntPrimed.contains(thingy)) {
-        event.setCancelled(false);
-        event.setYield(4.0F);
-        event.blockList().clear();
-        this.me.tntPrimed.remove(thingy);
-      }
-      if (this.me.napalm.contains(thingy)) {
-        event.setCancelled(false);
-        event.setYield(10.0F);
-        for (Block block : event.blockList()) {
-          block.setType(Material.FIRE);
-          this.me.getServer().getPluginManager().callEvent(new BlockBurnEvent(block));
-        }
-        event.blockList().clear();
-        this.me.napalm.remove(thingy);
-      }
+    public AdminListener(Frenz me, FileConfiguration config) {
+        this.me = me;
     }
-  }
+
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    public void onPlayerChat(PlayerChatEvent event) {
+        if (this.me.isMuted.contains(event.getPlayer()))
+            event.setCancelled(true);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
+        if ((event.getMessage().startsWith("/me "))
+                && (this.me.isMuted.contains(event.getPlayer())))
+            event.setCancelled(true);
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onEntityExplode(EntityExplodeEvent event) {
+        if ((event.getEntity() instanceof TNTPrimed)) {
+            TNTPrimed thingy = (TNTPrimed) event.getEntity();
+            if (this.me.tntPrimed.contains(thingy)) {
+                event.setCancelled(false);
+                event.setYield(4.0F);
+                event.blockList().clear();
+                this.me.tntPrimed.remove(thingy);
+            }
+            if (this.me.napalm.contains(thingy)) {
+                event.setCancelled(false);
+                event.setYield(10.0F);
+                for (Block block : event.blockList()) {
+                    block.setType(Material.FIRE);
+                    this.me.getServer().getPluginManager()
+                            .callEvent(new BlockBurnEvent(block));
+                }
+                event.blockList().clear();
+                this.me.napalm.remove(thingy);
+            }
+        }
+    }
 }

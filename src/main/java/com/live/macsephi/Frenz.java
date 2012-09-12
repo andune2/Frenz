@@ -73,27 +73,37 @@ import com.live.macsephi.Speed.SuperSpeedCommand;
 import com.live.macsephi.Utility.CanIDoCommand;
 import com.live.macsephi.Utility.TPRandomCommand;
 
-public class Frenz extends JavaPlugin
-{
+public class Frenz extends JavaPlugin {
     public static final Logger log = Bukkit.getLogger();
     public FileConfiguration config;
     private File configFile;
     protected boolean disableFireCharges;
     public ArrayList<TNTPrimed> tntPrimed = new ArrayList();
     public ArrayList<TNTPrimed> napalm = new ArrayList();
-    public ArrayList<Player> obsidian = new ArrayList(); public ArrayList<Player> wood = new ArrayList();
-    public ArrayList<Player> stone = new ArrayList(); public ArrayList<Player> iron = new ArrayList(); public ArrayList<Player> diamond = new ArrayList();
-    public ArrayList<Player> gold = new ArrayList(); public ArrayList<Player> carve = new ArrayList(); public ArrayList<Player> sharpen = new ArrayList();
-    public ArrayList<Player> serrate = new ArrayList(); public ArrayList<Player> extend = new ArrayList(); public ArrayList<Player> temper = new ArrayList();
-    public ArrayList<Player> bDivine = new ArrayList(); public ArrayList<Player> sDivine = new ArrayList(); public ArrayList<Player> aDivine = new ArrayList();
-    public ArrayList<Player> isEmo = new ArrayList(); public ArrayList<Player> isOwner = new ArrayList(); public ArrayList<Player> death = new ArrayList();
-    public ArrayList<Player> isSlain = new ArrayList(); public ArrayList<Player> isMuted = new ArrayList();
+    public ArrayList<Player> obsidian = new ArrayList();
+    public ArrayList<Player> wood = new ArrayList();
+    public ArrayList<Player> stone = new ArrayList();
+    public ArrayList<Player> iron = new ArrayList();
+    public ArrayList<Player> diamond = new ArrayList();
+    public ArrayList<Player> gold = new ArrayList();
+    public ArrayList<Player> carve = new ArrayList();
+    public ArrayList<Player> sharpen = new ArrayList();
+    public ArrayList<Player> serrate = new ArrayList();
+    public ArrayList<Player> extend = new ArrayList();
+    public ArrayList<Player> temper = new ArrayList();
+    public ArrayList<Player> bDivine = new ArrayList();
+    public ArrayList<Player> sDivine = new ArrayList();
+    public ArrayList<Player> aDivine = new ArrayList();
+    public ArrayList<Player> isEmo = new ArrayList();
+    public ArrayList<Player> isOwner = new ArrayList();
+    public ArrayList<Player> death = new ArrayList();
+    public ArrayList<Player> isSlain = new ArrayList();
+    public ArrayList<Player> isMuted = new ArrayList();
 
     private final CommandExecutor boomExecutor = new BoomExecutor(this);
     private final CommandExecutor kitExecutor = new KitExecutor(this);
 
-    public void onEnable()
-    {
+    public void onEnable() {
         checkConfig();
         registerCommands();
         setupPermissions();
@@ -107,8 +117,7 @@ public class Frenz extends JavaPlugin
         log.info("Fyre's [MobEffects] has been Enabled!");
     }
 
-    public void onDisable()
-    {
+    public void onDisable() {
         log.info("Fyre's [MobEffects] has been Disabled!");
     }
 
@@ -128,10 +137,12 @@ public class Frenz extends JavaPlugin
 
             getCommand("canido").setExecutor(new CanIDoCommand(this));
             getCommand("tprandom").setExecutor(new TPRandomCommand(this));
-            getCommand("sacredwool").setExecutor(new SacredWoolCommand(this, this.config));
+            getCommand("sacredwool").setExecutor(
+                    new SacredWoolCommand(this, this.config));
             getCommand("shutup").setExecutor(new ShutUpCommand(this));
             getCommand("distort").setExecutor(new DistortCommand(this));
-            getCommand("superdistort").setExecutor(new SuperDistortCommand(this));
+            getCommand("superdistort").setExecutor(
+                    new SuperDistortCommand(this));
             getCommand("emosuicide").setExecutor(new EmoSuicideCommand(this));
             getCommand("slice").setExecutor(new SliceCommand(this));
             getCommand("curse").setExecutor(new CurseCommand(this));
@@ -139,8 +150,10 @@ public class Frenz extends JavaPlugin
             getCommand("curemore").setExecutor(new CureMoreCommand(this));
             getCommand("fullrestore").setExecutor(new FullRestoreCommand(this));
             getCommand("carveblade").setExecutor(new CarveBladeCommand(this));
-            getCommand("sharpenblade").setExecutor(new SharpenBladeCommand(this));
-            getCommand("serrateblade").setExecutor(new SerrateBladeCommand(this));
+            getCommand("sharpenblade").setExecutor(
+                    new SharpenBladeCommand(this));
+            getCommand("serrateblade").setExecutor(
+                    new SerrateBladeCommand(this));
             getCommand("extendblade").setExecutor(new ExtendBladeCommand(this));
             getCommand("temperblade").setExecutor(new TemperBladeCommand(this));
             getCommand("divineblade").setExecutor(new DivineBladeCommand(this));
@@ -163,8 +176,10 @@ public class Frenz extends JavaPlugin
             getCommand("stoneshield").setExecutor(new StoneShieldCommand(this));
             getCommand("goldshield").setExecutor(new GoldShieldCommand(this));
             getCommand("ironshield").setExecutor(new IronShieldCommand(this));
-            getCommand("diamondshield").setExecutor(new DiamondShieldCommand(this));
-            getCommand("obsidianshield").setExecutor(new ObsidianShieldCommand(this));
+            getCommand("diamondshield").setExecutor(
+                    new DiamondShieldCommand(this));
+            getCommand("obsidianshield").setExecutor(
+                    new ObsidianShieldCommand(this));
             getCommand("deathblade").setExecutor(new DeathBladeCommand(this));
             getCommand("reloadme").setExecutor(new ReloadMeCommand(this));
             getCommand("food").setExecutor(new FoodCommand(this));
@@ -180,6 +195,7 @@ public class Frenz extends JavaPlugin
     public boolean hasPermission(Player player, String node) {
         return player.hasPermission(node);
     }
+
     @Deprecated
     public static boolean hasPermissions(Player player, String node) {
         return player.hasPermission(node);
@@ -192,181 +208,228 @@ public class Frenz extends JavaPlugin
             try {
                 this.configFile.createNewFile();
             } catch (IOException e) {
-                log.severe("[MobEffects] ERROR could not create config.yml!\r\n" + e);
+                log.severe("[MobEffects] ERROR could not create config.yml!\r\n"
+                        + e);
                 return;
             }
         }
         this.config = YamlConfiguration.loadConfiguration(this.configFile);
 
         if (!this.config.contains("Enchantments.DiscountedCost(%)")) {
-            this.config.set("Enchantments.DiscountedCost(%)", Integer.valueOf(50));
+            this.config.set("Enchantments.DiscountedCost(%)",
+                    Integer.valueOf(50));
         }
         if (!this.config.contains("DeathMessages.Explosion.Enabled")) {
-            this.config.set("DeathMessages.Explosion.Enabled", Boolean.valueOf(false));
+            this.config.set("DeathMessages.Explosion.Enabled",
+                    Boolean.valueOf(false));
         }
         if (!this.config.contains("DeathMessages.Explosion.Message")) {
             this.config.set("DeathMessages.Explosion.Message", "has exploded!");
         }
         if (!this.config.contains("DeathMessages.Suicide.Enabled")) {
-            this.config.set("DeathMessages.Suicide.Enabled", Boolean.valueOf(false));
+            this.config.set("DeathMessages.Suicide.Enabled",
+                    Boolean.valueOf(false));
         }
         if (!this.config.contains("DeathMessages.Suicide.Message")) {
-            this.config.set("DeathMessages.Suicide.Message", "has committed suicide!");
+            this.config.set("DeathMessages.Suicide.Message",
+                    "has committed suicide!");
         }
         if (!this.config.contains("DeathMessages.Drowning.Enabled")) {
-            this.config.set("DeathMessages.Drowning.Enabled", Boolean.valueOf(false));
+            this.config.set("DeathMessages.Drowning.Enabled",
+                    Boolean.valueOf(false));
         }
         if (!this.config.contains("DeathMessages.Drowning.Message")) {
             this.config.set("DeathMessages.Drowning.Message", "has drowned!");
         }
         if (!this.config.contains("DeathMessages.Fall.Enabled")) {
-            this.config.set("DeathMessages.Fall.Enabled", Boolean.valueOf(false));
+            this.config.set("DeathMessages.Fall.Enabled",
+                    Boolean.valueOf(false));
         }
         if (!this.config.contains("DeathMessages.Fall.Message")) {
-            this.config.set("DeathMessages.Fall.Message", "has fallen to their death!");
+            this.config.set("DeathMessages.Fall.Message",
+                    "has fallen to their death!");
         }
         if (!this.config.contains("DeathMessages.Fire.Enabled")) {
-            this.config.set("DeathMessages.Fire.Enabled", Boolean.valueOf(false));
+            this.config.set("DeathMessages.Fire.Enabled",
+                    Boolean.valueOf(false));
         }
         if (!this.config.contains("DeathMessages.Fire.Message")) {
-            this.config.set("DeathMessages.Fire.Message", "has burned to death!");
+            this.config.set("DeathMessages.Fire.Message",
+                    "has burned to death!");
         }
         if (!this.config.contains("DeathMessages.Lava.Enabled")) {
-            this.config.set("DeathMessages.Lava.Enabled", Boolean.valueOf(false));
+            this.config.set("DeathMessages.Lava.Enabled",
+                    Boolean.valueOf(false));
         }
         if (!this.config.contains("DeathMessages.Lava.Message")) {
-            this.config.set("DeathMessages.Lava.Message", "has burned to death!");
+            this.config.set("DeathMessages.Lava.Message",
+                    "has burned to death!");
         }
         if (!this.config.contains("DeathMessages.Lightning.Enabled")) {
-            this.config.set("DeathMessages.Lightning.Enabled", Boolean.valueOf(false));
+            this.config.set("DeathMessages.Lightning.Enabled",
+                    Boolean.valueOf(false));
         }
         if (!this.config.contains("DeathMessages.Lightning.Message")) {
-            this.config.set("DeathMessages.Lightning.Message", "has been struck down by the gods!");
+            this.config.set("DeathMessages.Lightning.Message",
+                    "has been struck down by the gods!");
         }
         if (!this.config.contains("DeathMessages.Magic.Enabled")) {
-            this.config.set("DeathMessages.Magic.Enabled", Boolean.valueOf(false));
+            this.config.set("DeathMessages.Magic.Enabled",
+                    Boolean.valueOf(false));
         }
         if (!this.config.contains("DeathMessages.Magic.Message")) {
-            this.config.set("DeathMessages.Magic.Message", "has been killed by magic!");
+            this.config.set("DeathMessages.Magic.Message",
+                    "has been killed by magic!");
         }
         if (!this.config.contains("DeathMessages.Poison.Enabled")) {
-            this.config.set("DeathMessages.Poison.Enabled", Boolean.valueOf(false));
+            this.config.set("DeathMessages.Poison.Enabled",
+                    Boolean.valueOf(false));
         }
         if (!this.config.contains("DeathMessages.Poison.Message")) {
-            this.config.set("DeathMessages.Poison.Message", "has died from poison!");
+            this.config.set("DeathMessages.Poison.Message",
+                    "has died from poison!");
         }
         if (!this.config.contains("DeathMessages.Starvation.Enabled")) {
-            this.config.set("DeathMessages.Starvation.Enabled", Boolean.valueOf(false));
+            this.config.set("DeathMessages.Starvation.Enabled",
+                    Boolean.valueOf(false));
         }
         if (!this.config.contains("DeathMessages.Starvation.Message")) {
-            this.config.set("DeathMessages.Starvation.Message", "has starved to death!");
+            this.config.set("DeathMessages.Starvation.Message",
+                    "has starved to death!");
         }
         if (!this.config.contains("DeathMessages.Suffocation.Enabled")) {
-            this.config.set("DeathMessages.Suffocation.Enabled", Boolean.valueOf(false));
+            this.config.set("DeathMessages.Suffocation.Enabled",
+                    Boolean.valueOf(false));
         }
         if (!this.config.contains("DeathMessages.Suffocation.Message")) {
-            this.config.set("DeathMessages.Suffocation.Message", "has suffocated!");
+            this.config.set("DeathMessages.Suffocation.Message",
+                    "has suffocated!");
         }
         if (!this.config.contains("DisableFireCharges")) {
             this.config.set("DisableFireCharges", Boolean.valueOf(true));
         }
 
-        this.disableFireCharges = this.config.getBoolean("DisableFireCharges", true);
+        this.disableFireCharges = this.config.getBoolean("DisableFireCharges",
+                true);
 
-        String[] worlds = 
-            { "sollidium", "syradia", "eklimata", "aquarius", "tamriel", "oblivion", "terralite", "aztec", "earth", "earth_nether" };
+        String[] worlds = { "sollidium", "syradia", "eklimata", "aquarius",
+                "tamriel", "oblivion", "terralite", "aztec", "earth",
+                "earth_nether" };
         for (String world : worlds) {
             if (!this.config.contains("EnabledMobs." + world + ".Ocelot")) {
-                this.config.set("EnabledMobs." + world + ".Ocelot", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Ocelot",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".IronGolem")) {
-                this.config.set("EnabledMobs." + world + ".IronGolem", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".IronGolem",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Blaze")) {
-                this.config.set("EnabledMobs." + world + ".Blaze", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Blaze",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Cave-Spider")) {
-                this.config.set("EnabledMobs." + world + ".Cave-Spider", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Cave-Spider",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Chicken")) {
-                this.config.set("EnabledMobs." + world + ".Chicken", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Chicken",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Cow")) {
-                this.config.set("EnabledMobs." + world + ".Cow", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Cow",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Creeper")) {
-                this.config.set("EnabledMobs." + world + ".Creeper", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Creeper",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Ender Dragon")) {
-                this.config.set("EnabledMobs." + world + ".Ender Dragon", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Ender Dragon",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Enderman")) {
-                this.config.set("EnabledMobs." + world + ".Enderman", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Enderman",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Ghast")) {
-                this.config.set("EnabledMobs." + world + ".Ghast", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Ghast",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Magma Cube")) {
-                this.config.set("EnabledMobs." + world + ".Magma Cube", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Magma Cube",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Mooshroom")) {
-                this.config.set("EnabledMobs." + world + ".Mooshroom", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Mooshroom",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Pig")) {
-                this.config.set("EnabledMobs." + world + ".Pig", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Pig",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Pigman")) {
-                this.config.set("EnabledMobs." + world + ".Pigman", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Pigman",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Sheep")) {
-                this.config.set("EnabledMobs." + world + ".Sheep", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Sheep",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Silverfish")) {
-                this.config.set("EnabledMobs." + world + ".Silverfish", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Silverfish",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Skeleton")) {
-                this.config.set("EnabledMobs." + world + ".Skeleton", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Skeleton",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Slime")) {
-                this.config.set("EnabledMobs." + world + ".Slime", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Slime",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Snowman")) {
-                this.config.set("EnabledMobs." + world + ".Snowman", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Snowman",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Spider")) {
-                this.config.set("EnabledMobs." + world + ".Spider", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Spider",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Squid")) {
-                this.config.set("EnabledMobs." + world + ".Squid", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Squid",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Villager")) {
-                this.config.set("EnabledMobs." + world + ".Villager", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Villager",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Wolf")) {
-                this.config.set("EnabledMobs." + world + ".Wolf", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Wolf",
+                        Boolean.valueOf(true));
             }
             if (!this.config.contains("EnabledMobs." + world + ".Zombie")) {
-                this.config.set("EnabledMobs." + world + ".Zombie", Boolean.valueOf(true));
+                this.config.set("EnabledMobs." + world + ".Zombie",
+                        Boolean.valueOf(true));
             }
         }
         saveConfig();
     }
 
-    public void reloadConfig()
-    {
+    public void reloadConfig() {
         try {
             if (this.configFile == null) {
                 checkConfig();
             }
             this.config.load(this.configFile);
         } catch (Exception e) {
-            log.severe("[MobEffects] ERROR config.yml could not be properly loaded. Please check the file for syntax errors." + e);
+            log.severe("[MobEffects] ERROR config.yml could not be properly loaded. Please check the file for syntax errors."
+                    + e);
             this.config = YamlConfiguration.loadConfiguration(this.configFile);
         }
     }
 
-    public void saveConfig()
-    {
+    public void saveConfig() {
         try {
             if (this.configFile == null) {
                 checkConfig();
@@ -380,18 +443,23 @@ public class Frenz extends JavaPlugin
     public void removeMobEffect(LivingEntity entity, int type) {
         try {
             if ((entity instanceof Player)) {
-                EntityPlayer player = ((CraftPlayer)entity).getHandle();
-                player.netServerHandler.sendPacket(new Packet42RemoveMobEffect(player.id, new MobEffect(type, 0, 0)));
+                EntityPlayer player = ((CraftPlayer) entity).getHandle();
+                player.netServerHandler.sendPacket(new Packet42RemoveMobEffect(
+                        player.id, new MobEffect(type, 0, 0)));
             }
             Field field = EntityLiving.class.getDeclaredField("effects");
             field.setAccessible(true);
 
-            HashMap effects = (HashMap)field.get(((CraftLivingEntity)entity).getHandle());
-            effects.remove(Integer.valueOf(type)); } catch (Exception localException) {
-            }
+            HashMap effects = (HashMap) field.get(((CraftLivingEntity) entity)
+                    .getHandle());
+            effects.remove(Integer.valueOf(type));
+        } catch (Exception localException) {
+        }
     }
 
-    public void setMobEffect(LivingEntity entity, int type, int duration, int amplifier) {
-        ((CraftLivingEntity)entity).getHandle().addEffect(new MobEffect(type, duration, amplifier));
+    public void setMobEffect(LivingEntity entity, int type, int duration,
+            int amplifier) {
+        ((CraftLivingEntity) entity).getHandle().addEffect(
+                new MobEffect(type, duration, amplifier));
     }
 }
