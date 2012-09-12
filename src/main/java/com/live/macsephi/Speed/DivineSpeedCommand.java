@@ -1,6 +1,5 @@
 package com.live.macsephi.Speed;
 
-import java.util.ArrayList;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,7 +20,7 @@ public class DivineSpeedCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             this.player = ((Player) sender);
-            if (Frenz.hasPermissions(this.player, "MobEffects.divinespeed")) {
+            if (me.hasPermission(this.player, "MobEffects.divinespeed")) {
                 if (this.me.sDivine.contains(this.player)) {
                     this.me.removeMobEffect(this.player, 1);
                     this.me.sDivine.remove(this.player);

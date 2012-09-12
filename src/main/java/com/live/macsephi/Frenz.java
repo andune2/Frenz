@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
 
 import net.minecraft.server.EntityLiving;
@@ -78,27 +80,31 @@ public class Frenz extends JavaPlugin {
     public FileConfiguration config;
     private File configFile;
     protected boolean disableFireCharges;
-    public ArrayList<TNTPrimed> tntPrimed = new ArrayList();
-    public ArrayList<TNTPrimed> napalm = new ArrayList();
-    public ArrayList<Player> obsidian = new ArrayList();
-    public ArrayList<Player> wood = new ArrayList();
-    public ArrayList<Player> stone = new ArrayList();
-    public ArrayList<Player> iron = new ArrayList();
-    public ArrayList<Player> diamond = new ArrayList();
-    public ArrayList<Player> gold = new ArrayList();
-    public ArrayList<Player> carve = new ArrayList();
-    public ArrayList<Player> sharpen = new ArrayList();
-    public ArrayList<Player> serrate = new ArrayList();
-    public ArrayList<Player> extend = new ArrayList();
-    public ArrayList<Player> temper = new ArrayList();
-    public ArrayList<Player> bDivine = new ArrayList();
-    public ArrayList<Player> sDivine = new ArrayList();
-    public ArrayList<Player> aDivine = new ArrayList();
-    public ArrayList<Player> isEmo = new ArrayList();
-    public ArrayList<Player> isOwner = new ArrayList();
-    public ArrayList<Player> death = new ArrayList();
-    public ArrayList<Player> isSlain = new ArrayList();
-    public ArrayList<Player> isMuted = new ArrayList();
+    public ArrayList<TNTPrimed> tntPrimed = new ArrayList<TNTPrimed>();
+    public ArrayList<TNTPrimed> napalm = new ArrayList<TNTPrimed>();
+    public ArrayList<Player> obsidian = new ArrayList<Player>();
+    public ArrayList<Player> wood = new ArrayList<Player>();
+    public ArrayList<Player> stone = new ArrayList<Player>();
+    public ArrayList<Player> iron = new ArrayList<Player>();
+    public ArrayList<Player> diamond = new ArrayList<Player>();
+    public ArrayList<Player> gold = new ArrayList<Player>();
+    public ArrayList<Player> carve = new ArrayList<Player>();
+    public ArrayList<Player> sharpen = new ArrayList<Player>();
+    public ArrayList<Player> serrate = new ArrayList<Player>();
+    public ArrayList<Player> extend = new ArrayList<Player>();
+    public ArrayList<Player> temper = new ArrayList<Player>();
+    public ArrayList<Player> bDivine = new ArrayList<Player>();
+    public ArrayList<Player> sDivine = new ArrayList<Player>();
+    public ArrayList<Player> aDivine = new ArrayList<Player>();
+    public ArrayList<Player> isEmo = new ArrayList<Player>();
+    public ArrayList<Player> isOwner = new ArrayList<Player>();
+    public ArrayList<Player> death = new ArrayList<Player>();
+    public ArrayList<Player> isSlain = new ArrayList<Player>();
+    
+    /* isMuted is used during chat events, must be synchronized to be thread safe
+     * since chat events are now async as of Bukkit 1.3.1
+     */
+    public List<Player> isMuted = Collections.synchronizedList(new ArrayList<Player>());
 
     private final CommandExecutor boomExecutor = new BoomExecutor(this);
     private final CommandExecutor kitExecutor = new KitExecutor(this);
@@ -440,6 +446,19 @@ public class Frenz extends JavaPlugin {
         }
     }
 
+    /** Warning due to raw type, this is using CraftBukkit instead of
+     * Bukkit API. Need to look at if there is a way to do this without
+     * using CraftBukkit.  -morganm 9/11/12
+     * 
+     * Update: there is, it involves .removePotionEffect() call, which
+     * requires converting the raw integer 2nd argument into a 
+     * PotionEffectType class (has impact on all calling classes, big
+     * change that requires careful testing to be sure we get it all
+     * right).  -morganm 9/11/12
+     * 
+     * @param entity
+     * @param type
+     */
     public void removeMobEffect(LivingEntity entity, int type) {
         try {
             if ((entity instanceof Player)) {

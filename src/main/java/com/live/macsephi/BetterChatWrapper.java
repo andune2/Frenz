@@ -23,11 +23,15 @@ public class BetterChatWrapper
         7, 7, 7, 7, 9, 6, 7, 8, 7, 6, 6, 9, 7, 6, 7, 1 };
 
     private static final String allowedChars = SharedConstants.allowedCharacters;
+    
+    /* Warning cleanup: none of these are used. -morganm 9/11/12
+     * 
     private static final char COLOR_CHAR = '\u00A7';
     private static final char SPACE_CHAR = ' ';
     private static final char OTHER_COLOR_CHAR = '&';
     private static final int CHAT_WINDOW_WIDTH = 320;
     private static final int CHAT_STRING_LENGTH = 119;
+    */
 
     public static String[] wrapText(String text)
     {

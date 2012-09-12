@@ -4,7 +4,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 public class CustomEventCaller implements Listener {
     @EventHandler(ignoreCancelled = true)
@@ -18,6 +17,9 @@ public class CustomEventCaller implements Listener {
         switch (cause) {
         case ENTITY_EXPLOSION:
         case FALL:
+        default:
+            // no idea why these do nothing. What's this supposed
+            // to do?  -morganm 9/11/12
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.live.macsephi.Admin;
 
-import java.io.PrintStream;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -8,12 +7,13 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 
 import com.live.macsephi.Frenz;
 
 public class KitExecutor implements CommandExecutor {
+    @SuppressWarnings("unused")
     private final Frenz me;
+    
     private static final ItemStack[] KIT_1 = {
             new ItemStack(Material.WOOD_SWORD),
             new ItemStack(Material.COMPASS),

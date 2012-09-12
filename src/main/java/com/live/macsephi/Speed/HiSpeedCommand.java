@@ -1,13 +1,11 @@
 package com.live.macsephi.Speed;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitScheduler;
 
 import com.live.macsephi.Frenz;
 
@@ -23,7 +21,7 @@ public class HiSpeedCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             this.player = ((Player) sender);
-            if (Frenz.hasPermissions(this.player, "MobEffects.hispeed")) {
+            if (me.hasPermission(this.player, "MobEffects.hispeed")) {
                 this.me.setMobEffect(this.player, 1, 3000, 2);
                 this.me.getServer().getScheduler()
                         .scheduleSyncDelayedTask(this.me, new Runnable() {

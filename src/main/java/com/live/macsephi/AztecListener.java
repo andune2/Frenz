@@ -1,29 +1,24 @@
 package com.live.macsephi;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
+
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class AztecListener implements Listener {
+    /* Warning cleanup: none of these are used. -morganm 9/11/12
+     * 
     private static final int CHANCE_OF_GIANT = 8;
     private static final int GIANT_XP_MULTIPLIER = 10;
     private static final List<Material> NONPHYSICAL_BLOCKS = Arrays
@@ -44,6 +39,7 @@ public class AztecListener implements Listener {
                     Material.STONE_PLATE, Material.SUGAR_CANE_BLOCK,
                     Material.TORCH, Material.WALL_SIGN, Material.WEB,
                     Material.WOOD_PLATE, Material.YELLOW_FLOWER });
+    */
 
     @EventHandler
     public void onEntityDeath(EntityDeathEvent event) {
@@ -72,7 +68,7 @@ public class AztecListener implements Listener {
                 && (event.getEntityType() == EntityType.ZOMBIE)
                 && (r.nextInt(100) < 8)) {
             event.setCancelled(true);
-            w.spawnCreature(event.getLocation(), EntityType.GIANT);
+            w.spawnEntity(event.getLocation(), EntityType.GIANT);
         }
 
         if (event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.SPAWNER_EGG)

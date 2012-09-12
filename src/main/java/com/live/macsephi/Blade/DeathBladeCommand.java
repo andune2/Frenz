@@ -1,7 +1,5 @@
 package com.live.macsephi.Blade;
 
-import java.io.PrintStream;
-import java.util.ArrayList;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

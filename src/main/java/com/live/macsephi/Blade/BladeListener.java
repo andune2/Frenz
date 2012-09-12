@@ -1,6 +1,5 @@
 package com.live.macsephi.Blade;
 
-import java.util.ArrayList;
 import org.bukkit.entity.EnderDragonPart;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
