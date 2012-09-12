@@ -1,0 +1,2 @@
+# Message to show when running /frenztest command
+testMessage: 'Test command worked!'

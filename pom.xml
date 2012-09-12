@@ -1,0 +1,105 @@
+<!--
+  Maven build file for Frenz
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.live.macsephi</groupId>
+  <artifactId>Frenz</artifactId>
+  <version>2.0-SNAPSHOT</version>
+  <name>Frenz</name>
+  <description>Frenz server custom plugin</description>
+  <url>https://dev.bukkit.org/server-mods/Frenz/</url>
+
+  <repositories>
+    <repository>
+      <id>bukkit-repo</id>
+      <url>http://repo.bukkit.org/content/groups/public/</url>
+    </repository>
+    <repository>
+      <id>morganm-repo</id>
+      <url>http://morganmc.dyndns.org/nexus/content/groups/public/</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <!-- Bukkit -->
+    <dependency>
+      <groupId>org.bukkit</groupId>
+      <artifactId>bukkit</artifactId>
+      <version>1.3.1-R2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bukkit</groupId>
+      <artifactId>craftbukkit</artifactId>
+      <version>1.3.1-R2.0</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+    <finalName>${project.artifactId}</finalName>
+
+    <!-- Resources -->
+    <resources>
+      <resource>
+        <targetPath>.</targetPath>
+        <directory>${basedir}/src/main/resources/</directory>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>plugin.yml</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <!-- Plugins -->
+    <plugins>
+      <!-- Compile plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <verbose>true</verbose>
+          <fork>true</fork>
+          <source>1.6</source>
+          <target>1.6</target>
+          <compilerVersion>1.6</compilerVersion>
+        </configuration>
+      </plugin>
+
+      <!-- JAR creation plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.3.1</version>
+        <configuration>
+          <archive>
+            <addMavenDescriptor>true</addMavenDescriptor>
+            <manifest>
+              <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+            </manifest>
+            <manifestEntries>
+              <Implementation-Build>${buildNumber}</Implementation-Build>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+
+      <!-- Release -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.2.2</version><!--$NO-MVN-MAN-VER$-->
+        <configuration>
+          <preparationGoals>assembly:assembly</preparationGoals>
+          <goals>assembly:assembly</goals>
+          <tagNameFormat>@{project.version}</tagNameFormat>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
