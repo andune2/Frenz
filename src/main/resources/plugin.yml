@@ -2,8 +2,7 @@ name: ${project.name}
 main: ${groupId}.${project.name}
 url: ${project.url}
 version: ${project.version}
-author: Fyre
-soft-depend: [GroupManager]
+author: Kirbyarm
 commands:
   frenztest:
     description: A test command
@@ -14,22 +13,6 @@ commands:
     description: A kit.
   a3:
     description: A kit.
-  canido:
-    description: Checks if you have permission for specified command.
-  tprandom:
-    description: Teleport to a place on the map (within reason).
-  setrank:
-    description: Set a player's rank.
-  reloadgm:
-    description: Reload the GroupManager permissions file.
-  promote:
-    description: Promote a player to the next highest rank.
-  demote:
-    description: Demote a player to the next lowest rank.
-  sacredore:
-    description: Set the cuboid region and world of the Sacred Ore.
-  sacredwool:
-    description: Set the cuboid region and world of the Sacred Wool.
   napalm:
     description: Strike a player with napalm.
   shutup:
@@ -42,12 +25,6 @@ commands:
     description: Wield the power of death.
   boom:
     description: Make things go boom.
-  implode:
-    description: Suicide, of the explodey kind.
-  punish:
-    description: Punish misbehaving players.
-  free:
-    description: Free a player from punishment.
   emosuicide:
     description: Suicide, emo style.
   superdistort:
@@ -123,14 +100,6 @@ permissions:
     description: This is a description.
   MobEffects.tprandom:
     description: This is a description.
-  MobEffects.setrank:
-    description: This is a description.
-  MobEffects.reloadgm:
-    description: This is a description.
-  MobEffects.demote:
-    description: This is a description.
-  MobEffects.promote:
-    description: This is a description.
   MobEffects.sacredwool:
     description: This is a description.
   Mobeffects.sacredore:
@@ -149,15 +118,7 @@ permissions:
     description: This is a description.
   MobEffects.deathblade:
     description: This is a description.
-  MobEffects.ownerit:
-    description: This is a description.
-  MobEffects.implode:
-    description: This is a description.
   MobEffects.boom:
-    description: This is a description.
-  MobEffects.punish:
-    description: This is a description.
-  MobEffects.free:
     description: This is a description.
   MobEffects.emosuicide:
     description: This is a description.
