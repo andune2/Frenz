@@ -1,3 +1,5 @@
+// Mackenzie - Removed functionality of Implode command as it is to be removed.
+
 package com.live.macsephi.Admin;
 
 import java.util.logging.Logger;
@@ -67,20 +69,6 @@ public class BoomExecutor implements CommandExecutor {
                 log.info("Usage: /boom <player>");
             }
 
-        }
-
-        if ((command.getName().equalsIgnoreCase("implode"))
-                && ((sender instanceof Player))) {
-            Player player = (Player) sender;
-            if (this.me.hasPluginPermission(player, "implode")) {
-                TNTPrimed tnt = (TNTPrimed) player.getWorld().spawn(
-                        player.getLocation(), TNTPrimed.class);
-                this.me.tntPrimed.add(tnt);
-                tnt.setFuseTicks(0);
-                return true;
-            }
-            player.sendMessage(ChatColor.RED
-                    + "You don't have permission to use this command.");
         }
 
         if ((command.getName().equalsIgnoreCase("napalm"))

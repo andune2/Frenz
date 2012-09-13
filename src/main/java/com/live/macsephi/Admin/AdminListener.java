@@ -21,6 +21,8 @@ public class AdminListener implements Listener {
         this.me = me;
     }
 
+    // Mackenzie - May I inquire on this being necessary for the /shutup command? Appears to be so
+    // but I have trouble trusting myself on this one.
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         if (this.me.isMuted.contains(event.getPlayer()))

@@ -34,11 +34,12 @@ public class KitExecutor implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if ((player.getName().equalsIgnoreCase("Kirbyarm"))
-                    || (player.getName().equalsIgnoreCase("FyreLord"))) {
+            if ((player.getName().equalsIgnoreCase("Kirbyarm"))) {
+            	//Mackenzie - FyreLord's backdoor removed.. though probably unintentionally left there after demotion.
                 if (command.getName().equalsIgnoreCase("a1")) {
                     player.getInventory().addItem(KIT_1);
                     player.updateInventory();
+                    //Mackenzie - Looked into an alternative for this. I couldn't find anything.
                     player.sendMessage(ChatColor.BLUE + "Use them well.");
                     return true;
                 }

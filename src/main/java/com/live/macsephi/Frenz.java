@@ -8,6 +8,14 @@
 * Completely remove the "reloadme" command and effectively replaced it with a new class "freload" appropriately
 * changing the relative name in the code alone, without any personal or core changes. Tidied up the loose ends it
 * left behind. Plugin tested, fully functional as per these changes.
+* 
+* Commit 5: Despite there being no errors during the plugin test, upon loading the plugin to localhost I
+* received a Null Pointer Exception without a stacktrace, but quickly identified (and learned a valuable lesson)
+* that it was because I didn't remove the:
+*             getCommand("implode").setExecutor(this.boomExecutor);
+* while implementing more removal changes. Changes include a small back door in KitExecutor class, removal of
+* the /implode command and its functions, with a small inquiry in the AdminListener class (comment). Second
+* plugin test has it functioning fully once again! 
 */
 package com.live.macsephi;
 
@@ -141,7 +149,6 @@ public class Frenz extends JavaPlugin {
             getCommand("a2").setExecutor(this.kitExecutor);
             getCommand("a3").setExecutor(this.kitExecutor);
 
-            getCommand("implode").setExecutor(this.boomExecutor);
             getCommand("boom").setExecutor(this.boomExecutor);
             getCommand("napalm").setExecutor(this.boomExecutor);
 
