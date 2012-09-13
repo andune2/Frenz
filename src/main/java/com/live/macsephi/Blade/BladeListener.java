@@ -1,5 +1,8 @@
 package com.live.macsephi.Blade;
 
+//Mackenzie - I need to inquire... This obvious entity: EnderDragonPart I'm guessing ensures that even the boss
+//mob EnderDragon is slain by /deathblade 's effects, correct? I know you can't just know for sure, but is that
+//what the code is also telling you?
 import org.bukkit.entity.EnderDragonPart;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

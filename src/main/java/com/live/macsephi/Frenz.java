@@ -21,6 +21,13 @@
 * replaced with FrenzListener, all ties to the changes successfully cleaned up without error or warning, and
 * same applies to the other changes, which includes removing AztecListener class and RecipeHandler class, making
 * necessary changes to compensate within the main Frenz class. Updated plugin.yml
+* 
+* Commit 7: An overhaul on the main class and other primary classes, ensuring no dead or unused code remains,
+* effectively finalizing that all unwanted functionality is removed, and the plugin test verifies it is all
+* working accurately, without errors or warnings (besides the warnings you have supressed still). Double checked
+* ALL classes on the hunt for any back doors or security violations, and everything is clean!! Making a clean,
+* unseen backup of the source in this condition, as I don't know how to rollback your repository in case
+* something goes wrong.
 */
 package com.live.macsephi;
 
@@ -220,206 +227,17 @@ public class Frenz extends JavaPlugin {
         }
         this.config = YamlConfiguration.loadConfiguration(this.configFile);
 
-        if (!this.config.contains("Enchantments.DiscountedCost(%)")) {
-            this.config.set("Enchantments.DiscountedCost(%)",
-                    Integer.valueOf(50));
-        }
-        if (!this.config.contains("DeathMessages.Explosion.Enabled")) {
-            this.config.set("DeathMessages.Explosion.Enabled",
-                    Boolean.valueOf(false));
-        }
-        if (!this.config.contains("DeathMessages.Explosion.Message")) {
-            this.config.set("DeathMessages.Explosion.Message", "has exploded!");
-        }
-        if (!this.config.contains("DeathMessages.Suicide.Enabled")) {
-            this.config.set("DeathMessages.Suicide.Enabled",
-                    Boolean.valueOf(false));
-        }
-        if (!this.config.contains("DeathMessages.Suicide.Message")) {
-            this.config.set("DeathMessages.Suicide.Message",
-                    "has committed suicide!");
-        }
-        if (!this.config.contains("DeathMessages.Drowning.Enabled")) {
-            this.config.set("DeathMessages.Drowning.Enabled",
-                    Boolean.valueOf(false));
-        }
-        if (!this.config.contains("DeathMessages.Drowning.Message")) {
-            this.config.set("DeathMessages.Drowning.Message", "has drowned!");
-        }
-        if (!this.config.contains("DeathMessages.Fall.Enabled")) {
-            this.config.set("DeathMessages.Fall.Enabled",
-                    Boolean.valueOf(false));
-        }
-        if (!this.config.contains("DeathMessages.Fall.Message")) {
-            this.config.set("DeathMessages.Fall.Message",
-                    "has fallen to their death!");
-        }
-        if (!this.config.contains("DeathMessages.Fire.Enabled")) {
-            this.config.set("DeathMessages.Fire.Enabled",
-                    Boolean.valueOf(false));
-        }
-        if (!this.config.contains("DeathMessages.Fire.Message")) {
-            this.config.set("DeathMessages.Fire.Message",
-                    "has burned to death!");
-        }
-        if (!this.config.contains("DeathMessages.Lava.Enabled")) {
-            this.config.set("DeathMessages.Lava.Enabled",
-                    Boolean.valueOf(false));
-        }
-        if (!this.config.contains("DeathMessages.Lava.Message")) {
-            this.config.set("DeathMessages.Lava.Message",
-                    "has burned to death!");
-        }
-        if (!this.config.contains("DeathMessages.Lightning.Enabled")) {
-            this.config.set("DeathMessages.Lightning.Enabled",
-                    Boolean.valueOf(false));
-        }
-        if (!this.config.contains("DeathMessages.Lightning.Message")) {
-            this.config.set("DeathMessages.Lightning.Message",
-                    "has been struck down by the gods!");
-        }
-        if (!this.config.contains("DeathMessages.Magic.Enabled")) {
-            this.config.set("DeathMessages.Magic.Enabled",
-                    Boolean.valueOf(false));
-        }
-        if (!this.config.contains("DeathMessages.Magic.Message")) {
-            this.config.set("DeathMessages.Magic.Message",
-                    "has been killed by magic!");
-        }
-        if (!this.config.contains("DeathMessages.Poison.Enabled")) {
-            this.config.set("DeathMessages.Poison.Enabled",
-                    Boolean.valueOf(false));
-        }
-        if (!this.config.contains("DeathMessages.Poison.Message")) {
-            this.config.set("DeathMessages.Poison.Message",
-                    "has died from poison!");
-        }
-        if (!this.config.contains("DeathMessages.Starvation.Enabled")) {
-            this.config.set("DeathMessages.Starvation.Enabled",
-                    Boolean.valueOf(false));
-        }
-        if (!this.config.contains("DeathMessages.Starvation.Message")) {
-            this.config.set("DeathMessages.Starvation.Message",
-                    "has starved to death!");
-        }
-        if (!this.config.contains("DeathMessages.Suffocation.Enabled")) {
-            this.config.set("DeathMessages.Suffocation.Enabled",
-                    Boolean.valueOf(false));
-        }
-        if (!this.config.contains("DeathMessages.Suffocation.Message")) {
-            this.config.set("DeathMessages.Suffocation.Message",
-                    "has suffocated!");
-        }
         if (!this.config.contains("DisableFireCharges")) {
             this.config.set("DisableFireCharges", Boolean.valueOf(true));
         }
 
-        this.disableFireCharges = this.config.getBoolean("DisableFireCharges",
-                true);
-
-        String[] worlds = { "sollidium", "syradia", "eklimata", "aquarius",
-                "tamriel", "oblivion", "terralite", "aztec", "earth",
-                "earth_nether" };
-        for (String world : worlds) {
-            if (!this.config.contains("EnabledMobs." + world + ".Ocelot")) {
-                this.config.set("EnabledMobs." + world + ".Ocelot",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".IronGolem")) {
-                this.config.set("EnabledMobs." + world + ".IronGolem",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Blaze")) {
-                this.config.set("EnabledMobs." + world + ".Blaze",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Cave-Spider")) {
-                this.config.set("EnabledMobs." + world + ".Cave-Spider",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Chicken")) {
-                this.config.set("EnabledMobs." + world + ".Chicken",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Cow")) {
-                this.config.set("EnabledMobs." + world + ".Cow",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Creeper")) {
-                this.config.set("EnabledMobs." + world + ".Creeper",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Ender Dragon")) {
-                this.config.set("EnabledMobs." + world + ".Ender Dragon",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Enderman")) {
-                this.config.set("EnabledMobs." + world + ".Enderman",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Ghast")) {
-                this.config.set("EnabledMobs." + world + ".Ghast",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Magma Cube")) {
-                this.config.set("EnabledMobs." + world + ".Magma Cube",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Mooshroom")) {
-                this.config.set("EnabledMobs." + world + ".Mooshroom",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Pig")) {
-                this.config.set("EnabledMobs." + world + ".Pig",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Pigman")) {
-                this.config.set("EnabledMobs." + world + ".Pigman",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Sheep")) {
-                this.config.set("EnabledMobs." + world + ".Sheep",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Silverfish")) {
-                this.config.set("EnabledMobs." + world + ".Silverfish",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Skeleton")) {
-                this.config.set("EnabledMobs." + world + ".Skeleton",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Slime")) {
-                this.config.set("EnabledMobs." + world + ".Slime",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Snowman")) {
-                this.config.set("EnabledMobs." + world + ".Snowman",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Spider")) {
-                this.config.set("EnabledMobs." + world + ".Spider",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Squid")) {
-                this.config.set("EnabledMobs." + world + ".Squid",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Villager")) {
-                this.config.set("EnabledMobs." + world + ".Villager",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Wolf")) {
-                this.config.set("EnabledMobs." + world + ".Wolf",
-                        Boolean.valueOf(true));
-            }
-            if (!this.config.contains("EnabledMobs." + world + ".Zombie")) {
-                this.config.set("EnabledMobs." + world + ".Zombie",
-                        Boolean.valueOf(true));
-            }
-        }
+        this.disableFireCharges = this.config.getBoolean("DisableFireCharges", true);
+        // Mackenzie - I have some research to do on config.yml. If you have any advice on it for a beginner, I'd
+        //most certainly appreciate any given. I understand the DisableFireCharges, but this brings us back to
+        //do I want to change my own oil, or know how the deeper mechanisms work? We both know it is the deeper
+        //mechanisms/mechanics.
         saveConfig();
-    }
+}
 
     public void reloadConfig() {
         try {
@@ -458,6 +276,7 @@ public class Frenz extends JavaPlugin {
      * @param entity
      * @param type
      */
+    //Mackenzie - Understood, as well as I can at this point.
     public void removeMobEffect(LivingEntity entity, int type) {
         try {
             if ((entity instanceof Player)) {
@@ -468,6 +287,9 @@ public class Frenz extends JavaPlugin {
             Field field = EntityLiving.class.getDeclaredField("effects");
             field.setAccessible(true);
 
+            //Mackenzie - I see you had to supress the warnings. Could you suggest a way for me to test this
+            //particular function is still working correctly? I'm still trying to wrap my finger around the whole
+            //HashMap system, its purpose and functionality.
             @SuppressWarnings("rawtypes")
             HashMap effects = (HashMap) field.get(((CraftLivingEntity) entity)
                     .getHandle());
