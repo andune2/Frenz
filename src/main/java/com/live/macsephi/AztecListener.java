@@ -75,6 +75,12 @@ public class AztecListener implements Listener {
             event.setCancelled(true);
     }
 
+    /** andune comment: this appears to stop any block break events on the
+     * world "aztec" (except for a select few players). Further, it appears to
+     * always allow ladders to be broken, even on world aztec.
+     * 
+     * @param event
+     */
     @EventHandler(ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event) {
         if (event.getBlock().getType() == Material.LADDER)
@@ -92,53 +98,60 @@ public class AztecListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerInteract(PlayerInteractEvent event) {
         if ((event.getAction() == Action.RIGHT_CLICK_AIR)
-                || (event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+                || (event.getAction() == Action.RIGHT_CLICK_BLOCK))
+        {
+            // true when player has a sign in their hand and clicked on a chest
             if ((event.getItem() != null)
-                    && (event.getItem().getTypeId() == 323)
-                    && (event.getClickedBlock().getType() == Material.CHEST)) {
+                    && (event.getItem().getTypeId() == Material.SIGN.getId())
+                    && (event.getClickedBlock().getType() == Material.CHEST))
+            {
+                // deny the use of the chest and the block
                 event.setUseInteractedBlock(PlayerInteractEvent.Result.DENY);
                 event.setUseItemInHand(PlayerInteractEvent.Result.DENY);
                 event.setCancelled(true);
-                event.getPlayer()
-                        .sendMessage(
-                                BetterChatWrapper
-                                        .wrapText(ChatColor.BLUE
-                                                + "I'm afraid that due to a security bug I can't allow players to open chests while holding signs at this time. Please switch to a different item. -Fyre"));
+                
+                // no idea why this is the case..
+                event.getPlayer().sendMessage(BetterChatWrapper.wrapText(ChatColor.BLUE
+                    + "I'm afraid that due to a security bug I can't allow players to open chests while holding signs at this time. Please switch to a different item."));
             }
 
-            if ((event.isBlockInHand())
-                    && (event.getPlayer().getWorld().getName()
-                            .equalsIgnoreCase("aztec"))) {
-                if ((event.getMaterial() == Material.LADDER)
-                        || (event.getItem().getType() == Material.LADDER))
+            // special rule for aztec world when placing blocks
+            if ((event.isBlockInHand()) && (event.getPlayer().getWorld().getName().equalsIgnoreCase("aztec"))) {
+                // allow the placement of ladders
+                if ((event.getMaterial() == Material.LADDER) || (event.getItem().getType() == Material.LADDER))
                     return;
+                
+                // special player exemptions..
                 String name = event.getPlayer().getName();
                 if ((name.equalsIgnoreCase("FyreLord"))
                         || (name.equalsIgnoreCase("Sunnywulf"))
                         || (name.equalsIgnoreCase("zang")))
                     return;
+                
+                // everyone else isn't allowed to place blocks
                 event.setCancelled(true);
                 return;
             }
 
+            // was there an item in the players hand?
             if (event.hasItem()) {
-                if ((event.getPlayer().getWorld().getName()
-                        .equalsIgnoreCase("aztec"))
+                // are they on the aztec world and was the action trying to scoop up lava with a bucket?
+                if ((event.getPlayer().getWorld().getName().equalsIgnoreCase("aztec"))
                         && ((event.getMaterial() == Material.LAVA_BUCKET) || (event
                                 .getItem().getType() == Material.LAVA_BUCKET))) {
+                    // if yes, deny the event
                     event.setUseItemInHand(PlayerInteractEvent.Result.DENY);
                     event.setCancelled(true);
                 }
 
+                // or are they trying to interact with a monster egg? or have a monster egg in hand?
                 if ((event.getMaterial() == Material.MONSTER_EGG)
                         || (event.getItem().getType() == Material.MONSTER_EGG)) {
+                    // if yes, deny the event
                     event.setUseItemInHand(PlayerInteractEvent.Result.DENY);
                     event.setCancelled(true);
-                    event.getPlayer()
-                            .sendMessage(
-                                    BetterChatWrapper
-                                            .wrapText(ChatColor.RED
-                                                    + "The use of all mob spawners and spawner eggs has been temporarily disabled. -Fyre"));
+                    event.getPlayer().sendMessage(BetterChatWrapper.wrapText(ChatColor.RED
+                        + "The use of all mob spawners and spawner eggs has been temporarily disabled."));
                 }
             }
         }
