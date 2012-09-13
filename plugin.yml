@@ -28,8 +28,6 @@ commands:
     description: Punish misbehaving players.
   free:
     description: Free a player from punishment.
-  emosuicide:
-    description: Suicide, emo style.
   superdistort:
     description: Distortion that ignores immunity.
   "off":
@@ -119,8 +117,6 @@ permissions:
   MobEffects.punish:
     description: This is a description.
   MobEffects.free:
-    description: This is a description.
-  MobEffects.emosuicide:
     description: This is a description.
   MobEffects.superdistort:
     description: This is a description.
