@@ -21,7 +21,6 @@ public class SliceCommand implements CommandExecutor {
         if ((sender instanceof Player)) {
             if (this.me.hasPluginPermission(player, "slice")) {
                 if (player.getHealth() <= 5) {
-                    this.me.isEmo.add(player);
                     player.setHealth(0);
                     player.sendMessage(ChatColor.DARK_BLUE
                             + "Like an emo, you take a razor to your wrists.");

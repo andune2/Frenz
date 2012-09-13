@@ -112,8 +112,6 @@ public class Frenz extends JavaPlugin {
     public ArrayList<Player> sSuper = new ArrayList<Player>();
     public ArrayList<Player> sHi = new ArrayList<Player>();
     public ArrayList<Player> sSpeed = new ArrayList<Player>();
-    public ArrayList<Player> isEmo = new ArrayList<Player>();
-    public ArrayList<Player> isOwner = new ArrayList<Player>();
     public ArrayList<Player> death = new ArrayList<Player>();
     public ArrayList<Player> isSlain = new ArrayList<Player>();
     
