@@ -47,7 +47,6 @@ import com.live.macsephi.Blade.ExtendBladeCommand;
 import com.live.macsephi.Blade.SerrateBladeCommand;
 import com.live.macsephi.Blade.SharpenBladeCommand;
 import com.live.macsephi.Blade.TemperBladeCommand;
-import com.live.macsephi.GMCommands.GMReloadCommand;
 import com.live.macsephi.MiscCommands.CureCommand;
 import com.live.macsephi.MiscCommands.CureMoreCommand;
 import com.live.macsephi.MiscCommands.CurseCommand;
@@ -127,10 +126,6 @@ public class Frenz extends JavaPlugin {
 
     private void registerCommands() {
         try {
-            if (getServer().getPluginManager().getPlugin("GroupManager") != null) {
-                getCommand("reloadgm").setExecutor(new GMReloadCommand(this));
-            }
-
             getCommand("a1").setExecutor(this.kitExecutor);
             getCommand("a2").setExecutor(this.kitExecutor);
             getCommand("a3").setExecutor(this.kitExecutor);
