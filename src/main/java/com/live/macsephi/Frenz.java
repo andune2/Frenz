@@ -54,7 +54,6 @@ import com.live.macsephi.MiscCommands.CureCommand;
 import com.live.macsephi.MiscCommands.CureMoreCommand;
 import com.live.macsephi.MiscCommands.CurseCommand;
 import com.live.macsephi.MiscCommands.DistortCommand;
-import com.live.macsephi.MiscCommands.EmoSuicideCommand;
 import com.live.macsephi.MiscCommands.FoodCommand;
 import com.live.macsephi.MiscCommands.FullRestoreCommand;
 import com.live.macsephi.MiscCommands.OffCommand;
@@ -76,6 +75,7 @@ import com.live.macsephi.Speed.SuperSpeedCommand;
 * Mackenzie 12/09/2012
 */
 //Mackenzie - Removed imports to no longer existing SacredWool classes.
+//Mackenzie - Removed imports to no longer existing EmosuicideCommand class.
 
 public class Frenz extends JavaPlugin {
     private static final String PERMISSION_BASE = "Frenz.";
@@ -144,7 +144,7 @@ public class Frenz extends JavaPlugin {
             getCommand("shutup").setExecutor(new ShutUpCommand(this));
             getCommand("distort").setExecutor(new DistortCommand(this));
             getCommand("superdistort").setExecutor(new SuperDistortCommand(this));
-            getCommand("emosuicide").setExecutor(new EmoSuicideCommand(this));
+            // Mackenzie - Removed emosuicide getCommand
             getCommand("slice").setExecutor(new SliceCommand(this));
             getCommand("curse").setExecutor(new CurseCommand(this));
             getCommand("cure").setExecutor(new CureCommand(this));
