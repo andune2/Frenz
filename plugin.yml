@@ -1,0 +1,206 @@
+name: Frenz
+main: com.live.macsephi.Frenz
+version: 0.75
+author: Mackenzie
+mentor: Andune
+commands:
+  a1:
+    description: A kit.
+  a2:
+    description: A kit.
+  a3:
+    description: A kit.
+  napalm:
+    description: Strike a player with napalm.
+  shutup:
+    description: Shut 'em up.
+  food:
+    description: Eat food.
+  reloadme:
+    description: Reload the MobEffects config.
+  deathblade:
+    description: Wield the power of death.
+  boom:
+    description: Make things go boom.
+  implode:
+    description: Suicide, of the explodey kind.
+  punish:
+    description: Punish misbehaving players.
+  free:
+    description: Free a player from punishment.
+  emosuicide:
+    description: Suicide, emo style.
+  superdistort:
+    description: Distortion that ignores immunity.
+  "off":
+    description: The off switch on all Arm and Speed skills.
+  slice:
+    description: Cast off some of those pesky hearts.
+  curse:
+    description: Curse your foes.
+  distort:
+    description: Distort their perception!
+  cure:
+    description: Heals two hearts.
+  curemore:
+    description: Heals five hearts.
+  fullrestore:
+    description: Heals you completely.
+  carveblade:
+    description: Increases your attack power.
+  sharpenblade:
+    description: Increases your attack power.
+  serrateblade:
+    description: Increases your attack power.
+  extendblade:
+    description: Increases your attack power.
+  temperblade:
+    description: Increases your attack power.
+  divineblade:
+    description: Increases your attack power.
+  strengtharm:
+    description: Increases your attack speed.
+  chargearm:
+    description: Increases your attack speed.
+  powerarm:
+    description: Increases your attack speed.
+  frenzyarm:
+    description: Increases your attack speed.
+  pickaxearm:
+    description: Increases your attack speed.
+  divinearm:
+    description: Increases your attack speed.
+  extraspeed:
+    description: Increases your movement speed.
+  hispeed:
+    description: Increases your movement speed.
+  superspeed:
+    description: Increases your movement speed.
+  hyperspeed:
+    description: Increases your movement speed.
+  godspeed:
+    description: Increases your movement speed.
+  divinespeed:
+    description: Increases your movement speed.
+  woodshield:
+    description: Enhances your defenses.
+  stoneshield:
+    description: Enhances your defenses.
+  goldshield:
+    description: Enhances your defenses.
+  ironshield:
+    description: Enhances your defenses.
+  diamondshield:
+    description: Enhances your defenses.
+  obsidianshield:
+    description: Enhances your defenses.
+
+permissions:
+  MobEffects.shutemup:
+    description: This is a description.
+  MobEffects.food.king:
+    description: This is a description.
+  MobEffects.food.freeze:
+    description: This is a description.
+  MobEffects.food.meal:
+    description: This is a description.
+  MobEffects.food.snack:
+    description: This is a description.
+  MobEffects.reload:
+    description: This is a description.
+  MobEffects.deathblade:
+    description: This is a description.
+  MobEffects.ownerit:
+    description: This is a description.
+  MobEffects.implode:
+    description: This is a description.
+  MobEffects.boom:
+    description: This is a description.
+  MobEffects.punish:
+    description: This is a description.
+  MobEffects.free:
+    description: This is a description.
+  MobEffects.emosuicide:
+    description: This is a description.
+  MobEffects.superdistort:
+    description: This is a description.
+  MobEffects."off":
+    description: This is a description.
+  MobEffects.off.other:
+    description: This is a description.
+  MobEffects.slice:
+    description: This is a description.
+  MobEffects.curse:
+    description: This is a description.
+  MobEffects.curse.other:
+    description: This is a description.
+  MobEffects.uncurse:
+    description: This is a description.
+  MobEffects.uncurse.other:
+    description: This is a description.
+  MobEffects.distort:
+    description: This is a description.
+  MobEffects.distort.off:
+    description: This is a description.
+  MobEffects.distort.override:
+    description: This is a description.
+  MobEffects.strengtharm:
+    description: This is a description.
+  MobEffects.chargearm:
+    description: This is a description.
+  MobEffects.powerarm:
+    description: This is a description.
+  MobEffects.frenzyarm:
+    description: This is a description.
+  MobEffects.pickaxearm:
+    description: This is a description.
+  MobEffects.divinearm:
+    description: This is a description.
+  MobEffects.extraspeed:
+    description: This is a description.
+  MobEffects.hispeed:
+    description: This is a description.
+  MobEffects.superspeed:
+    description: This is a description.
+  MobEffects.hyperspeed:
+    description: This is a description.
+  MobEffects.godspeed:
+    description: This is a description.
+  MobEffects.divinespeed:
+    description: This is a description.
+  MobEffects.cure:
+    description: This is a description.
+  MobEffects.curemore:
+    description: This is a description.
+  MobEffects.fullrestore:
+    description: This is a description.
+  MobEffects.cure.other:
+    description: This is a description.
+  MobEffects.curemore.other:
+    description: This is a description.
+  MobEffects.fullrestore.other:
+    description: This is a description.
+  MobEffects.carveblade:
+    description: This is a description.
+  MobEffects.sharpenblade:
+    description: This is a description.
+  MobEffects.serrateblade:
+    description: This is a description.
+  MobEffects.temperblade:
+    description: This is a description.
+  MobEffects.extendblade:
+    description: This is a description.
+  MobEffects.divineblade:
+    description: This is a description.
+  MobEffects.woodshield:
+    description: This is a description.
+  MobEffects.stoneshield:
+    description: This is a description.
+  MobEffects.goldshield:
+    description: This is a description.
+  MobEffects.ironshield:
+    description: This is a description.
+  MobEffects.diamondshield:
+    description: This is a description.
+  MobEffects.obsidianshield:
+    description: This is a description.

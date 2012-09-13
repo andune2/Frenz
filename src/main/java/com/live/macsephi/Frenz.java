@@ -1,5 +1,7 @@
-//Testing a commit to your Frenz Github repository.
-
+/* Mackenzie - Commit 2: Sacred Wool functionality successfully removed all traces. Verified in-game that it
+* has not only been removed, but your changes such as the new hasPluginPermissions works fully, which it does!
+* No errors or warnings at this point, no stack trace or errors onEnable of test. Looks good.
+*/
 package com.live.macsephi;
 
 import java.io.File;
@@ -56,8 +58,6 @@ import com.live.macsephi.MiscCommands.FullRestoreCommand;
 import com.live.macsephi.MiscCommands.OffCommand;
 import com.live.macsephi.MiscCommands.SliceCommand;
 import com.live.macsephi.MiscCommands.SuperDistortCommand;
-import com.live.macsephi.Sacred.SacredListener;
-import com.live.macsephi.Sacred.SacredWoolCommand;
 import com.live.macsephi.Shield.DiamondShieldCommand;
 import com.live.macsephi.Shield.GoldShieldCommand;
 import com.live.macsephi.Shield.IronShieldCommand;
@@ -70,6 +70,10 @@ import com.live.macsephi.Speed.GodSpeedCommand;
 import com.live.macsephi.Speed.HiSpeedCommand;
 import com.live.macsephi.Speed.HyperSpeedCommand;
 import com.live.macsephi.Speed.SuperSpeedCommand;
+/*Does this import perchance have to do with the HashMap? 
+* Mackenzie 12/09/2012
+*/
+//Mackenzie - Removed imports to no longer existing SacredWool classes.
 
 public class Frenz extends JavaPlugin {
     private static final String PERMISSION_BASE = "Frenz.";
@@ -100,9 +104,6 @@ public class Frenz extends JavaPlugin {
     public ArrayList<Player> death = new ArrayList<Player>();
     public ArrayList<Player> isSlain = new ArrayList<Player>();
     
-    /* isMuted is used during chat events, must be synchronized to be thread safe
-     * since chat events are now async as of Bukkit 1.3.1
-     */
     public List<Player> isMuted = Collections.synchronizedList(new ArrayList<Player>());
 
     private final CommandExecutor boomExecutor = new BoomExecutor(this);
@@ -115,7 +116,7 @@ public class Frenz extends JavaPlugin {
         registerCommands();
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new MEListener(this), this);
-        pm.registerEvents(new SacredListener(this, this.config), this);
+        //Mackenzie - Removed SacredListener registerEvents
         pm.registerEvents(new BladeListener(this), this);
         pm.registerEvents(new AdminListener(this, this.config), this);
         pm.registerEvents(new AztecListener(), this);
@@ -137,7 +138,7 @@ public class Frenz extends JavaPlugin {
             getCommand("boom").setExecutor(this.boomExecutor);
             getCommand("napalm").setExecutor(this.boomExecutor);
 
-            getCommand("sacredwool").setExecutor(new SacredWoolCommand(this, this.config));
+            // Mackenzie - Removed SacredWool getCommand
             getCommand("shutup").setExecutor(new ShutUpCommand(this));
             getCommand("distort").setExecutor(new DistortCommand(this));
             getCommand("superdistort").setExecutor(new SuperDistortCommand(this));
