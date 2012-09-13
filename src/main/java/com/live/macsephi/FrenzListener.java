@@ -1,14 +1,20 @@
 package com.live.macsephi;
 
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowman;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBurnEvent;
 import org.bukkit.event.block.EntityBlockFormEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 //Mackenzie - Warning cleanup, removed unused imports.
@@ -49,4 +55,43 @@ public class FrenzListener implements Listener {
         }
     }
     //Mackenzie - Scrapped the discounted EXP/Enchanting function here.
+
+    // Mackenzie - May I inquire on this being necessary for the /shutup command? Appears to be so
+    // but I have trouble trusting myself on this one.
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    public void onPlayerChat(AsyncPlayerChatEvent event) {
+        if (this.me.isMuted.contains(event.getPlayer()))
+            event.setCancelled(true);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
+        if ((event.getMessage().startsWith("/me "))
+                && (this.me.isMuted.contains(event.getPlayer())))
+            event.setCancelled(true);
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onEntityExplode(EntityExplodeEvent event) {
+        if ((event.getEntity() instanceof TNTPrimed)) {
+            TNTPrimed thingy = (TNTPrimed) event.getEntity();
+            if (this.me.tntPrimed.contains(thingy)) {
+                event.setCancelled(false);
+                event.setYield(4.0F);
+                event.blockList().clear();
+                this.me.tntPrimed.remove(thingy);
+            }
+            if (this.me.napalm.contains(thingy)) {
+                event.setCancelled(false);
+                event.setYield(10.0F);
+                for (Block block : event.blockList()) {
+                    block.setType(Material.FIRE);
+                    this.me.getServer().getPluginManager()
+                            .callEvent(new BlockBurnEvent(block));
+                }
+                event.blockList().clear();
+                this.me.napalm.remove(thingy);
+            }
+        }
+    }
 }

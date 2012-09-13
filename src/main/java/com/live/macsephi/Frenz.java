@@ -1,33 +1,11 @@
-/* Mackenzie - Commit 2: Sacred Wool functionality successfully removed all traces. Verified in-game that it
-* has not only been removed, but your changes such as the new hasPluginPermissions works fully, which it does!
-* No errors or warnings at this point, no stack trace or errors onEnable of test. Looks good.
-* 
-* Commit 3: Testing to see if pushing this time correctly displays changes on Github.
-* 
-* Commit 4: Verified a few other functions are still error free in some of the Admin class commands.
-* Completely remove the "reloadme" command and effectively replaced it with a new class "freload" appropriately
-* changing the relative name in the code alone, without any personal or core changes. Tidied up the loose ends it
-* left behind. Plugin tested, fully functional as per these changes.
-* 
-* Commit 5: Despite there being no errors during the plugin test, upon loading the plugin to localhost I
-* received a Null Pointer Exception without a stacktrace, but quickly identified (and learned a valuable lesson)
-* that it was because I didn't remove the:
-*             getCommand("implode").setExecutor(this.boomExecutor);
-* while implementing more removal changes. Changes include a small back door in KitExecutor class, removal of
-* the /implode command and its functions, with a small inquiry in the AdminListener class (comment). Second
-* plugin test has it functioning fully once again!
-* 
-* Commit 6: Quite a few larger changes this time, main listener class MEListener deleted and appropriately
-* replaced with FrenzListener, all ties to the changes successfully cleaned up without error or warning, and
-* same applies to the other changes, which includes removing AztecListener class and RecipeHandler class, making
-* necessary changes to compensate within the main Frenz class. Updated plugin.yml
-* 
-* Commit 7: An overhaul on the main class and other primary classes, ensuring no dead or unused code remains,
-* effectively finalizing that all unwanted functionality is removed, and the plugin test verifies it is all
-* working accurately, without errors or warnings (besides the warnings you have supressed still). Double checked
-* ALL classes on the hunt for any back doors or security violations, and everything is clean!! Making a clean,
-* unseen backup of the source in this condition, as I don't know how to rollback your repository in case
-* something goes wrong.
+/* Mackenzie - Commit 8: Deleted AdminListener class, implementing its necessary functionality into the main
+ * FrenzListener class. My question here is, I had to change this:
+ * import com.live.macsephi.Admin.AdminListener; into this:
+ * import com.live.macsephi.FrenzListener;
+ * There aren't any warnings, but is that necessary to leave there? I get the feeling that import is no longer
+ * necessary. Please let me know what you think. Not feeling confident at all about this change, since I've
+ * never done anything like it before.. testing plugin now. Sweet!! All works, no debugging necessary,
+ * permissions and all that work fine too, tested only the affected functionality of course. Pushing.
 */
 package com.live.macsephi;
 
@@ -56,7 +34,7 @@ import org.bukkit.entity.TNTPrimed;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.live.macsephi.Admin.AdminListener;
+import com.live.macsephi.FrenzListener;
 import com.live.macsephi.Admin.BoomExecutor;
 import com.live.macsephi.Admin.KitExecutor;
 import com.live.macsephi.Admin.ReloadFrenzCommand;
@@ -148,7 +126,6 @@ public class Frenz extends JavaPlugin {
         pm.registerEvents(new FrenzListener(this), this);
         //Mackenzie - Removed SacredListener registerEvents
         pm.registerEvents(new BladeListener(this), this);
-        pm.registerEvents(new AdminListener(this, this.config), this);
 
         log.info("version "+getDescription().getVersion()+" has been Enabled!");
     }
