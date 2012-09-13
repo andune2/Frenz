@@ -28,9 +28,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.live.macsephi.Admin.AdminListener;
 import com.live.macsephi.Admin.BoomExecutor;
-import com.live.macsephi.Admin.FreeCommand;
 import com.live.macsephi.Admin.KitExecutor;
-import com.live.macsephi.Admin.PunishCommand;
 import com.live.macsephi.Admin.ReloadMeCommand;
 import com.live.macsephi.Admin.ShutUpCommand;
 import com.live.macsephi.Arm.ChargeArmCommand;
@@ -163,8 +161,6 @@ public class Frenz extends JavaPlugin {
             getCommand("godspeed").setExecutor(new GodSpeedCommand(this));
             getCommand("divinespeed").setExecutor(new DivineSpeedCommand(this));
             getCommand("off").setExecutor(new OffCommand(this));
-            getCommand("punish").setExecutor(new PunishCommand(this));
-            getCommand("free").setExecutor(new FreeCommand(this));
             getCommand("woodshield").setExecutor(new WoodShieldCommand(this));
             getCommand("stoneshield").setExecutor(new StoneShieldCommand(this));
             getCommand("goldshield").setExecutor(new GoldShieldCommand(this));
