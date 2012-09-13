@@ -6,6 +6,11 @@
  * necessary. Please let me know what you think. Not feeling confident at all about this change, since I've
  * never done anything like it before.. testing plugin now. Sweet!! All works, no debugging necessary,
  * permissions and all that work fine too, tested only the affected functionality of course. Pushing.
+ * 
+ * Commit 9: Repeated through process of previous commit, only not AdminListener, but instead, BladeListener.
+ * No bugs or errors, all worked out perfectly. Only took extra time to test as I had to multi-account and
+ * verify that with defense enhancements AND attack enhances that they still coincide properly and the
+ * damage is properly calculated in game, which it is so it's all good! Pushing.
 */
 package com.live.macsephi;
 
@@ -22,6 +27,7 @@ import net.minecraft.server.EntityLiving;
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.MobEffect;
 import net.minecraft.server.Packet42RemoveMobEffect;
+//Mackenzie - Does this import have to do with the HashMap?
 
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -45,7 +51,6 @@ import com.live.macsephi.Arm.FrenzyArmCommand;
 import com.live.macsephi.Arm.PickaxeArmCommand;
 import com.live.macsephi.Arm.PowerArmCommand;
 import com.live.macsephi.Arm.StrengthArmCommand;
-import com.live.macsephi.Blade.BladeListener;
 import com.live.macsephi.Blade.CarveBladeCommand;
 import com.live.macsephi.Blade.DeathBladeCommand;
 import com.live.macsephi.Blade.DivineBladeCommand;
@@ -74,11 +79,6 @@ import com.live.macsephi.Speed.GodSpeedCommand;
 import com.live.macsephi.Speed.HiSpeedCommand;
 import com.live.macsephi.Speed.HyperSpeedCommand;
 import com.live.macsephi.Speed.SuperSpeedCommand;
-/*Does this import perchance have to do with the HashMap? 
-* Mackenzie 12/09/2012
-*/
-//Mackenzie - Removed imports to no longer existing SacredWool classes.
-//Mackenzie - Removed imports to no longer existing EmosuicideCommand class.
 
 public class Frenz extends JavaPlugin {
     private static final String PERMISSION_BASE = "Frenz.";
@@ -104,11 +104,8 @@ public class Frenz extends JavaPlugin {
     public ArrayList<Player> bDivine = new ArrayList<Player>();
     public ArrayList<Player> sDivine = new ArrayList<Player>();
     public ArrayList<Player> aDivine = new ArrayList<Player>();
-    //Mackenzie - Where are these two arrays used elsewhere? "isEmo, isOwner"
     public ArrayList<Player> isEmo = new ArrayList<Player>();
     public ArrayList<Player> isOwner = new ArrayList<Player>();
-    //Mackenzie - Is this array "death" used anywhere since you cleaned out death messages? Things to consider:
-    //DeathBladeCommand, BladeListener, Shield commands.
     public ArrayList<Player> death = new ArrayList<Player>();
     public ArrayList<Player> isSlain = new ArrayList<Player>();
     
@@ -124,8 +121,6 @@ public class Frenz extends JavaPlugin {
         registerCommands();
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new FrenzListener(this), this);
-        //Mackenzie - Removed SacredListener registerEvents
-        pm.registerEvents(new BladeListener(this), this);
 
         log.info("version "+getDescription().getVersion()+" has been Enabled!");
     }
@@ -139,15 +134,11 @@ public class Frenz extends JavaPlugin {
             getCommand("a1").setExecutor(this.kitExecutor);
             getCommand("a2").setExecutor(this.kitExecutor);
             getCommand("a3").setExecutor(this.kitExecutor);
-
             getCommand("boom").setExecutor(this.boomExecutor);
             getCommand("napalm").setExecutor(this.boomExecutor);
-
-            // Mackenzie - Removed SacredWool getCommand
             getCommand("shutup").setExecutor(new ShutUpCommand(this));
             getCommand("distort").setExecutor(new DistortCommand(this));
             getCommand("superdistort").setExecutor(new SuperDistortCommand(this));
-            // Mackenzie - Removed emosuicide getCommand
             getCommand("slice").setExecutor(new SliceCommand(this));
             getCommand("curse").setExecutor(new CurseCommand(this));
             getCommand("cure").setExecutor(new CureCommand(this));
@@ -239,21 +230,6 @@ public class Frenz extends JavaPlugin {
             log.severe("[MobEffects] ERROR could not save config.yml\r\n" + e);
         }
     }
-
-    /** Warning due to raw type, this is using CraftBukkit instead of
-     * Bukkit API. Need to look at if there is a way to do this without
-     * using CraftBukkit.  -morganm 9/11/12
-     * 
-     * Update: there is, it involves .removePotionEffect() call, which
-     * requires converting the raw integer 2nd argument into a 
-     * PotionEffectType class (has impact on all calling classes, big
-     * change that requires careful testing to be sure we get it all
-     * right).  -morganm 9/11/12
-     * 
-     * @param entity
-     * @param type
-     */
-    //Mackenzie - Understood, as well as I can at this point.
     public void removeMobEffect(LivingEntity entity, int type) {
         try {
             if ((entity instanceof Player)) {
@@ -274,7 +250,6 @@ public class Frenz extends JavaPlugin {
         } catch (Exception localException) {
         }
     }
-
     public void setMobEffect(LivingEntity entity, int type, int duration,
             int amplifier) {
         ((CraftLivingEntity) entity).getHandle().addEffect(
