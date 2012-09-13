@@ -16,7 +16,7 @@ commands:
     description: Shut 'em up.
   food:
     description: Eat food.
-  reloadme:
+  freload:
     description: Reload the MobEffects config.
   deathblade:
     description: Wield the power of death.

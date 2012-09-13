@@ -3,6 +3,11 @@
 * No errors or warnings at this point, no stack trace or errors onEnable of test. Looks good.
 * 
 * Commit 3: Testing to see if pushing this time correctly displays changes on Github.
+* 
+* Commit 4: Verified a few other functions are still error free in some of the Admin class commands.
+* Completely remove the "reloadme" command and effectively replaced it with a new class "freload" appropriately
+* changing the relative name in the code alone, without any personal or core changes. Tidied up the loose ends it
+* left behind. Plugin tested, fully functional as per these changes.
 */
 package com.live.macsephi;
 
@@ -34,7 +39,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.live.macsephi.Admin.AdminListener;
 import com.live.macsephi.Admin.BoomExecutor;
 import com.live.macsephi.Admin.KitExecutor;
-import com.live.macsephi.Admin.ReloadMeCommand;
+import com.live.macsephi.Admin.ReloadFrenzCommand;
 import com.live.macsephi.Admin.ShutUpCommand;
 import com.live.macsephi.Arm.ChargeArmCommand;
 import com.live.macsephi.Arm.DivineArmCommand;
@@ -176,7 +181,7 @@ public class Frenz extends JavaPlugin {
             getCommand("diamondshield").setExecutor(new DiamondShieldCommand(this));
             getCommand("obsidianshield").setExecutor(new ObsidianShieldCommand(this));
             getCommand("deathblade").setExecutor(new DeathBladeCommand(this));
-            getCommand("reloadme").setExecutor(new ReloadMeCommand(this));
+            getCommand("freload").setExecutor(new ReloadFrenzCommand(this));
             getCommand("food").setExecutor(new FoodCommand(this));
         } catch (Exception e) {
             log.warning("[MobEffects] ERROR " + e);
