@@ -1,6 +1,6 @@
 name: Frenz
 main: com.live.macsephi.Frenz
-version: 0.91
+version: 0.92.50
 author: Mackenzie
 mentor: Andune
 commands:
@@ -50,19 +50,19 @@ commands:
     description: Increases your attack power.
   divineblade:
     description: Increases your attack power.
-  strengtharm:
+  miner:
     description: Increases your attack speed.
-  chargearm:
+  betterminer:
     description: Increases your attack speed.
-  powerarm:
+  superminer:
     description: Increases your attack speed.
-  frenzyarm:
+  hyperminer:
     description: Increases your attack speed.
-  pickaxearm:
+  godminer:
     description: Increases your attack speed.
-  divinearm:
+  divineminer:
     description: Increases your attack speed.
-  extraspeed:
+  speed:
     description: Increases your movement speed.
   hispeed:
     description: Increases your movement speed.
@@ -126,19 +126,19 @@ permissions:
     description: This is a description.
   MobEffects.distort.override:
     description: This is a description.
-  MobEffects.strengtharm:
+  MobEffects.miner:
     description: This is a description.
-  MobEffects.chargearm:
+  MobEffects.betterminer:
     description: This is a description.
-  MobEffects.powerarm:
+  MobEffects.superminer:
     description: This is a description.
-  MobEffects.frenzyarm:
+  MobEffects.hyperminer:
     description: This is a description.
-  MobEffects.pickaxearm:
+  MobEffects.godminer:
     description: This is a description.
-  MobEffects.divinearm:
+  MobEffects.divineminer:
     description: This is a description.
-  MobEffects.extraspeed:
+  MobEffects.speed:
     description: This is a description.
   MobEffects.hispeed:
     description: This is a description.

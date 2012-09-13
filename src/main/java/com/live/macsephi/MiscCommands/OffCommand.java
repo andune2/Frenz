@@ -1,3 +1,5 @@
+//Mackenzie - Removed no longer used array variables with the implementation of MiningCommands class.
+
 package com.live.macsephi.MiscCommands;
 
 import org.bukkit.ChatColor;
@@ -32,9 +34,6 @@ public class OffCommand implements CommandExecutor {
                     if (this.me.sDivine.contains(targetPlayer)) {
                         this.me.sDivine.remove(targetPlayer);
                     }
-                    if (this.me.aDivine.contains(targetPlayer)) {
-                        this.me.aDivine.remove(targetPlayer);
-                    }
                     this.me.removeMobEffect(targetPlayer, 1);
                     this.me.removeMobEffect(targetPlayer, 3);
                     targetPlayer.sendMessage(ChatColor.BLUE + player.getName()
@@ -48,9 +47,6 @@ public class OffCommand implements CommandExecutor {
                 if (args.length == 0) {
                     if (this.me.sDivine.contains(player)) {
                         this.me.sDivine.remove(player);
-                    }
-                    if (this.me.aDivine.contains(player)) {
-                        this.me.aDivine.remove(player);
                     }
                     this.me.removeMobEffect(player, 1);
                     this.me.removeMobEffect(player, 3);

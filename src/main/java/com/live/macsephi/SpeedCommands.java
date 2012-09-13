@@ -18,18 +18,18 @@ public class SpeedCommands implements CommandExecutor {
 
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args) {
-		if ((command.getName().equalsIgnoreCase("hispeed"))) {
+		if ((command.getName().equalsIgnoreCase("speed"))) {
 			if ((sender instanceof Player)) {
 				this.player = ((Player) sender);
-				if (me.hasPluginPermission(this.player, "hispeed")) {
-					if (this.me.sHi.contains(this.player)) {
+				if (me.hasPluginPermission(this.player, "speed")) {
+					if (this.me.sSpeed.contains(this.player)) {
 						this.me.removeMobEffect(this.player, 1);
-						this.me.sHi.remove(this.player);
+						this.me.sSpeed.remove(this.player);
 						this.player.sendMessage(ChatColor.DARK_GRAY
 								+"Y"+ChatColor.GRAY+"ou have calmed your own speed enhancement at will.");
 						return true;
 					}
-					this.me.sHi.add(this.player);
+					this.me.sSpeed.add(this.player);
 					this.me.setMobEffect(this.player, 1, 1800, 1);
 					this.player.sendMessage(ChatColor.GOLD
 							+"Y"+ChatColor.YELLOW + "ou feel a sudden sensation in your legs, as though you can" +
@@ -44,18 +44,18 @@ public class SpeedCommands implements CommandExecutor {
 			}
 			return false;
 		}
-		if ((command.getName().equalsIgnoreCase("extraspeed"))) {
+		if ((command.getName().equalsIgnoreCase("hispeed"))) {
 			if ((sender instanceof Player)) {
 				this.player = ((Player) sender);
-				if (me.hasPluginPermission(this.player, "extraspeed")) {
-					if (this.me.sExtra.contains(this.player)) {
+				if (me.hasPluginPermission(this.player, "hispeed")) {
+					if (this.me.sHi.contains(this.player)) {
 						this.me.removeMobEffect(this.player, 1);
-						this.me.sExtra.remove(this.player);
+						this.me.sHi.remove(this.player);
 						this.player.sendMessage(ChatColor.DARK_GRAY
 								+"Y"+ChatColor.GRAY+"ou have calmed your own speed enhancement at will.");
 						return true;
 					}
-					this.me.sExtra.add(this.player);
+					this.me.sHi.add(this.player);
 					this.me.setMobEffect(this.player, 1, 3000, 2);
 					this.player.sendMessage(ChatColor.GOLD
 							+"Y"+ChatColor.YELLOW + "ou feel as though you can outrun olympic experts!");

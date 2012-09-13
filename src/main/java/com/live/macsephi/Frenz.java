@@ -18,6 +18,13 @@
  * the /divinespeeed originally. I initially organized all speed commands into one easy to maintain class called
  * SpeedCommands, appropriately enabling me to delete all 6 (Name)SpeedCommand classes, and the Speed package.
  * Plugin fully tested and verified to work in every way, including permissions! (: Pushing.
+ * 
+ * Commit 11: Wow, despite having been able to organize much faster than the SpeedCommands, condensing the 6 Arm
+ * classes proved to be a massive headache.. finally some real troubleshooting! Alas, I figured it out myself,
+ * without having to research a single thing! (I could've looked answers up, but I love challenging myself).
+ * No errors in eclipse help, just vague stack traces. Anyways, merged the Arm classes, deleting them in the
+ * process, into a new class called MiningCommands. Tied up loose ends, customized the timers and messages,
+ * will consider at a later point if I want them toggleable or not.
 */
 package com.live.macsephi;
 
@@ -52,12 +59,7 @@ import com.live.macsephi.Admin.BoomExecutor;
 import com.live.macsephi.Admin.KitExecutor;
 import com.live.macsephi.Admin.ReloadFrenzCommand;
 import com.live.macsephi.Admin.ShutUpCommand;
-import com.live.macsephi.Arm.ChargeArmCommand;
-import com.live.macsephi.Arm.DivineArmCommand;
-import com.live.macsephi.Arm.FrenzyArmCommand;
-import com.live.macsephi.Arm.PickaxeArmCommand;
-import com.live.macsephi.Arm.PowerArmCommand;
-import com.live.macsephi.Arm.StrengthArmCommand;
+import com.live.macsephi.MiningCommands;
 import com.live.macsephi.Blade.CarveBladeCommand;
 import com.live.macsephi.Blade.DeathBladeCommand;
 import com.live.macsephi.Blade.DivineBladeCommand;
@@ -109,8 +111,7 @@ public class Frenz extends JavaPlugin {
     public ArrayList<Player> sHyper = new ArrayList<Player>();
     public ArrayList<Player> sSuper = new ArrayList<Player>();
     public ArrayList<Player> sHi = new ArrayList<Player>();
-    public ArrayList<Player> sExtra = new ArrayList<Player>();
-    public ArrayList<Player> aDivine = new ArrayList<Player>();
+    public ArrayList<Player> sSpeed = new ArrayList<Player>();
     public ArrayList<Player> isEmo = new ArrayList<Player>();
     public ArrayList<Player> isOwner = new ArrayList<Player>();
     public ArrayList<Player> death = new ArrayList<Player>();
@@ -157,13 +158,13 @@ public class Frenz extends JavaPlugin {
             getCommand("extendblade").setExecutor(new ExtendBladeCommand(this));
             getCommand("temperblade").setExecutor(new TemperBladeCommand(this));
             getCommand("divineblade").setExecutor(new DivineBladeCommand(this));
-            getCommand("strengtharm").setExecutor(new StrengthArmCommand(this));
-            getCommand("chargearm").setExecutor(new ChargeArmCommand(this));
-            getCommand("powerarm").setExecutor(new PowerArmCommand(this));
-            getCommand("frenzyarm").setExecutor(new FrenzyArmCommand(this));
-            getCommand("pickaxearm").setExecutor(new PickaxeArmCommand(this));
-            getCommand("divinearm").setExecutor(new DivineArmCommand(this));
-            getCommand("extraspeed").setExecutor(new SpeedCommands(this));
+            getCommand("miner").setExecutor(new MiningCommands(this));
+            getCommand("betterminer").setExecutor(new MiningCommands(this));
+            getCommand("superminer").setExecutor(new MiningCommands(this));
+            getCommand("hyperminer").setExecutor(new MiningCommands(this));
+            getCommand("godminer").setExecutor(new MiningCommands(this));
+            getCommand("divineminer").setExecutor(new MiningCommands(this));
+            getCommand("speed").setExecutor(new SpeedCommands(this));
             getCommand("hispeed").setExecutor(new SpeedCommands(this));
             getCommand("superspeed").setExecutor(new SpeedCommands(this));
             getCommand("hyperspeed").setExecutor(new SpeedCommands(this));
