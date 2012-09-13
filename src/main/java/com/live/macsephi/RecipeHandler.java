@@ -13,6 +13,15 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 
+/** I believe this whole class exists only to provide "enchanting discounts"
+ * as described in the original change requests. As such, I think this whole
+ * class should probably be removed. Maybe scan through it and see if you
+ * see anything of value in here and either trim out what you don't want or
+ * delete the class entirely if you don't want any of it.
+ * 
+ * @author andune
+ *
+ */
 public class RecipeHandler implements Listener {
     private final Server server;
 
