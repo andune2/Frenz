@@ -11,6 +11,13 @@
  * No bugs or errors, all worked out perfectly. Only took extra time to test as I had to multi-account and
  * verify that with defense enhancements AND attack enhances that they still coincide properly and the
  * damage is properly calculated in game, which it is so it's all good! Pushing.
+ * 
+ * Commit 10: This was extremely difficult and tedious for me to figure out toggling them by command. Added the
+ * arrays and utilized them well. Colorized and personalized the messages received to be much more professional,
+ * corrected the timers of them, removed the dead toggle code that did not work for any of the commands except
+ * the /divinespeeed originally. I initially organized all speed commands into one easy to maintain class called
+ * SpeedCommands, appropriately enabling me to delete all 6 (Name)SpeedCommand classes, and the Speed package.
+ * Plugin fully tested and verified to work in every way, including permissions! (: Pushing.
 */
 package com.live.macsephi;
 
@@ -73,12 +80,7 @@ import com.live.macsephi.Shield.IronShieldCommand;
 import com.live.macsephi.Shield.ObsidianShieldCommand;
 import com.live.macsephi.Shield.StoneShieldCommand;
 import com.live.macsephi.Shield.WoodShieldCommand;
-import com.live.macsephi.Speed.DivineSpeedCommand;
-import com.live.macsephi.Speed.ExtraSpeedCommand;
-import com.live.macsephi.Speed.GodSpeedCommand;
-import com.live.macsephi.Speed.HiSpeedCommand;
-import com.live.macsephi.Speed.HyperSpeedCommand;
-import com.live.macsephi.Speed.SuperSpeedCommand;
+import com.live.macsephi.SpeedCommands;
 
 public class Frenz extends JavaPlugin {
     private static final String PERMISSION_BASE = "Frenz.";
@@ -103,6 +105,11 @@ public class Frenz extends JavaPlugin {
     public ArrayList<Player> temper = new ArrayList<Player>();
     public ArrayList<Player> bDivine = new ArrayList<Player>();
     public ArrayList<Player> sDivine = new ArrayList<Player>();
+    public ArrayList<Player> sGod = new ArrayList<Player>();
+    public ArrayList<Player> sHyper = new ArrayList<Player>();
+    public ArrayList<Player> sSuper = new ArrayList<Player>();
+    public ArrayList<Player> sHi = new ArrayList<Player>();
+    public ArrayList<Player> sExtra = new ArrayList<Player>();
     public ArrayList<Player> aDivine = new ArrayList<Player>();
     public ArrayList<Player> isEmo = new ArrayList<Player>();
     public ArrayList<Player> isOwner = new ArrayList<Player>();
@@ -156,12 +163,12 @@ public class Frenz extends JavaPlugin {
             getCommand("frenzyarm").setExecutor(new FrenzyArmCommand(this));
             getCommand("pickaxearm").setExecutor(new PickaxeArmCommand(this));
             getCommand("divinearm").setExecutor(new DivineArmCommand(this));
-            getCommand("extraspeed").setExecutor(new ExtraSpeedCommand(this));
-            getCommand("hispeed").setExecutor(new HiSpeedCommand(this));
-            getCommand("superspeed").setExecutor(new SuperSpeedCommand(this));
-            getCommand("hyperspeed").setExecutor(new HyperSpeedCommand(this));
-            getCommand("godspeed").setExecutor(new GodSpeedCommand(this));
-            getCommand("divinespeed").setExecutor(new DivineSpeedCommand(this));
+            getCommand("extraspeed").setExecutor(new SpeedCommands(this));
+            getCommand("hispeed").setExecutor(new SpeedCommands(this));
+            getCommand("superspeed").setExecutor(new SpeedCommands(this));
+            getCommand("hyperspeed").setExecutor(new SpeedCommands(this));
+            getCommand("godspeed").setExecutor(new SpeedCommands(this));
+            getCommand("divinespeed").setExecutor(new SpeedCommands(this));
             getCommand("off").setExecutor(new OffCommand(this));
             getCommand("woodshield").setExecutor(new WoodShieldCommand(this));
             getCommand("stoneshield").setExecutor(new StoneShieldCommand(this));
