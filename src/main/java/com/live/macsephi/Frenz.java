@@ -72,7 +72,6 @@ import com.live.macsephi.Speed.GodSpeedCommand;
 import com.live.macsephi.Speed.HiSpeedCommand;
 import com.live.macsephi.Speed.HyperSpeedCommand;
 import com.live.macsephi.Speed.SuperSpeedCommand;
-import com.live.macsephi.Utility.CanIDoCommand;
 import com.live.macsephi.Utility.TPRandomCommand;
 
 public class Frenz extends JavaPlugin {
@@ -141,7 +140,6 @@ public class Frenz extends JavaPlugin {
             getCommand("boom").setExecutor(this.boomExecutor);
             getCommand("napalm").setExecutor(this.boomExecutor);
 
-            getCommand("canido").setExecutor(new CanIDoCommand(this));
             getCommand("tprandom").setExecutor(new TPRandomCommand(this));
             getCommand("sacredwool").setExecutor(new SacredWoolCommand(this, this.config));
             getCommand("shutup").setExecutor(new ShutUpCommand(this));
