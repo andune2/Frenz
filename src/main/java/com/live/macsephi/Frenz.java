@@ -1,6 +1,8 @@
 /* Mackenzie - Commit 2: Sacred Wool functionality successfully removed all traces. Verified in-game that it
 * has not only been removed, but your changes such as the new hasPluginPermissions works fully, which it does!
 * No errors or warnings at this point, no stack trace or errors onEnable of test. Looks good.
+* 
+* Commit 3: Testing to see if pushing this time correctly displays changes on Github.
 */
 package com.live.macsephi;
 
