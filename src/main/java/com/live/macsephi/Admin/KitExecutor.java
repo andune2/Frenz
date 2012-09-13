@@ -29,6 +29,7 @@ public class KitExecutor implements CommandExecutor {
         this.me = me;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean onCommand(CommandSender sender, Command command,
             String label, String[] args) {
         if ((sender instanceof Player)) {

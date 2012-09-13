@@ -444,6 +444,7 @@ public class Frenz extends JavaPlugin {
             Field field = EntityLiving.class.getDeclaredField("effects");
             field.setAccessible(true);
 
+            @SuppressWarnings("rawtypes")
             HashMap effects = (HashMap) field.get(((CraftLivingEntity) entity)
                     .getHandle());
             effects.remove(Integer.valueOf(type));
