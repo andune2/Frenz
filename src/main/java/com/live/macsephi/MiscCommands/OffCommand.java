@@ -25,8 +25,8 @@ public class OffCommand implements CommandExecutor {
                 targetPlayer = this.me.getServer().getPlayer(args[0]);
             }
 
-            if (this.me.hasPermission(player, "MobEffects.off")) {
-                if ((this.me.hasPermission(player, "MobEffects.off.other"))
+            if (this.me.hasPluginPermission(player, "off")) {
+                if ((this.me.hasPluginPermission(player, "off.other"))
                         && (args.length == 1) && (targetPlayer != null)
                         && (targetPlayer != player)) {
                     if (this.me.sDivine.contains(targetPlayer)) {

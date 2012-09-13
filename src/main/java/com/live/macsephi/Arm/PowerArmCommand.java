@@ -19,7 +19,7 @@ public class PowerArmCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.powerarm")) {
+            if (this.me.hasPluginPermission(player, "powerarm")) {
                 this.me.setMobEffect(player, 3, 4800, 3);
                 player.sendMessage(ChatColor.BLUE
                         + "Your arms power-up, making tools feel almost weightless to you.");

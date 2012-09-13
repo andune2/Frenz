@@ -19,7 +19,7 @@ public class DiamondShieldCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.plugin.hasPermission(player, "MobEffects.diamondshield")) {
+            if (this.plugin.hasPluginPermission(player, "diamondshield")) {
                 if (this.plugin.diamond.contains(player)) {
                     this.plugin.diamond.remove(player);
                     player.sendMessage(ChatColor.BLUE

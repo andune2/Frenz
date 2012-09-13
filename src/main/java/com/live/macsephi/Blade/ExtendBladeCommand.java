@@ -19,7 +19,7 @@ public class ExtendBladeCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.extendblade")) {
+            if (this.me.hasPluginPermission(player, "extendblade")) {
                 if (this.me.extend.contains(player)) {
                     this.me.extend.remove(player);
                     player.sendMessage(ChatColor.BLUE

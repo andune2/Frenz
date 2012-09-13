@@ -19,7 +19,7 @@ public class SharpenBladeCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.sharpenblade")) {
+            if (this.me.hasPluginPermission(player, "sharpenblade")) {
                 if (this.me.sharpen.contains(player)) {
                     this.me.sharpen.remove(player);
                     player.sendMessage(ChatColor.BLUE

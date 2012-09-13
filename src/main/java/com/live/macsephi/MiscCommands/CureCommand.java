@@ -19,8 +19,8 @@ public class CureCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.cure")) {
-                if ((this.me.hasPermission(player, "MobEffects.cure.other"))
+            if (this.me.hasPluginPermission(player, "cure")) {
+                if ((this.me.hasPluginPermission(player, "cure.other"))
                         && (args.length == 1)) {
                     Player target = this.me.getServer().getPlayer(args[0]);
                     if (target != player) {

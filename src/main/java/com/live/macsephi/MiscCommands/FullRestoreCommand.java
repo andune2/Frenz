@@ -19,10 +19,10 @@ public class FullRestoreCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.fullrestore")) {
+            if (this.me.hasPluginPermission(player, "fullrestore")) {
                 if ((args.length > 0)
-                        && (this.me.hasPermission(player,
-                                "MobEffects.fullrestore.other"))) {
+                        && (this.me.hasPluginPermission(player,
+                                "fullrestore.other"))) {
                     Player targetPlayer = this.me.getServer()
                             .getPlayer(args[0]);
 

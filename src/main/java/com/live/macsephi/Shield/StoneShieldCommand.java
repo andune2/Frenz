@@ -19,7 +19,7 @@ public class StoneShieldCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.plugin.hasPermission(player, "MobEffects.stoneshield")) {
+            if (this.plugin.hasPluginPermission(player, "stoneshield")) {
                 if (this.plugin.stone.contains(player)) {
                     this.plugin.stone.remove(player);
                     player.sendMessage(ChatColor.BLUE

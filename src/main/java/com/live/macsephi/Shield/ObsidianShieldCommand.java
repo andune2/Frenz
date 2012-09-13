@@ -19,7 +19,7 @@ public class ObsidianShieldCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.plugin.hasPermission(player, "MobEffects.obsidianshield")) {
+            if (this.plugin.hasPluginPermission(player, "obsidianshield")) {
                 if (this.plugin.obsidian.contains(player)) {
                     this.plugin.obsidian.remove(player);
                     player.sendMessage(ChatColor.BLUE

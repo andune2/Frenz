@@ -19,7 +19,7 @@ public class EmoSuicideCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             final Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.emosuicide")) {
+            if (this.me.hasPluginPermission(player, "emosuicide")) {
                 this.me.isEmo.add(player);
                 this.me.setMobEffect(player, 7, 20, 1);
                 this.me.getServer().getScheduler()

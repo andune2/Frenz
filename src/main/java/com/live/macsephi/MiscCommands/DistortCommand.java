@@ -22,7 +22,7 @@ public class DistortCommand implements CommandExecutor {
         if ((sender instanceof Player)) {
             this.player = ((Player) sender);
             if (args.length == 0) {
-                if (this.me.hasPermission(this.player, "MobEffects.distort")) {
+                if (this.me.hasPluginPermission(this.player, "distort")) {
                     this.me.setMobEffect(this.player, 9, 1800, 5);
                     this.player.sendMessage(ChatColor.BLUE
                             + "You have distorted your own vision!");
@@ -30,8 +30,8 @@ public class DistortCommand implements CommandExecutor {
                 }
             } else if ((args.length > 0) && (args[0].equalsIgnoreCase("off"))) {
                 if ((args.length == 2)
-                        && (this.me.hasPermission(this.player,
-                                "MobEffects.distort.off"))) {
+                        && (this.me.hasPluginPermission(this.player,
+                                "distort.off"))) {
                     if (this.me.getServer().getPlayer(args[1]) == null) {
                         this.player.sendMessage(ChatColor.RED
                                 + "Player does not exist!");
@@ -47,7 +47,7 @@ public class DistortCommand implements CommandExecutor {
                             + " has cured your distortion!");
                     return true;
                 }
-                if (this.me.hasPermission(this.player, "MobEffects.distort")) {
+                if (this.me.hasPluginPermission(this.player, "distort")) {
                     this.me.removeMobEffect(this.player, 9);
                     this.player.sendMessage(ChatColor.BLUE
                             + "You have cured your distortion!");
@@ -56,15 +56,15 @@ public class DistortCommand implements CommandExecutor {
             }
             if ((args.length > 0)
                     && (this.me
-                            .hasPermission(this.player, "MobEffects.distort"))) {
+                            .hasPluginPermission(this.player, "distort"))) {
                 if (this.me.getServer().getPlayer(args[0]) == null) {
                     this.player.sendMessage(ChatColor.RED
                             + "Player does not exist!");
                     return false;
                 }
                 this.targetPlayer = this.me.getServer().getPlayer(args[0]);
-                if (this.me.hasPermission(this.targetPlayer,
-                        "MobEffects.distort.override")) {
+                if (this.me.hasPluginPermission(this.targetPlayer,
+                        "distort.override")) {
                     this.player.sendMessage(ChatColor.BLUE
                             + this.targetPlayer.getName()
                             + "'s vision is immune to distortion!");

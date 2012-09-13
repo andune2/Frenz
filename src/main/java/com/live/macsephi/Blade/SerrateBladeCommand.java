@@ -19,7 +19,7 @@ public class SerrateBladeCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.serrateblade")) {
+            if (this.me.hasPluginPermission(player, "serrateblade")) {
                 if (this.me.serrate.contains(player)) {
                     this.me.serrate.remove(player);
                     player.sendMessage(ChatColor.BLUE

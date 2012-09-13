@@ -19,7 +19,7 @@ public class TemperBladeCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.temperblade")) {
+            if (this.me.hasPluginPermission(player, "temperblade")) {
                 if (this.me.temper.contains(player)) {
                     this.me.temper.remove(player);
                     player.sendMessage(ChatColor.BLUE

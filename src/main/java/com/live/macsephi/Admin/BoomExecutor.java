@@ -25,7 +25,7 @@ public class BoomExecutor implements CommandExecutor {
         if (command.getName().equalsIgnoreCase("boom")) {
             if ((sender instanceof Player)) {
                 Player player = (Player) sender;
-                if (this.me.hasPermission(player, "MobEffects.boom")) {
+                if (this.me.hasPluginPermission(player, "boom")) {
                     if (args.length == 1) {
                         Player target = this.me.getServer().getPlayer(args[0]);
                         if (target != null) {
@@ -72,7 +72,7 @@ public class BoomExecutor implements CommandExecutor {
         if ((command.getName().equalsIgnoreCase("implode"))
                 && ((sender instanceof Player))) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.implode")) {
+            if (this.me.hasPluginPermission(player, "implode")) {
                 TNTPrimed tnt = (TNTPrimed) player.getWorld().spawn(
                         player.getLocation(), TNTPrimed.class);
                 this.me.tntPrimed.add(tnt);
@@ -86,7 +86,7 @@ public class BoomExecutor implements CommandExecutor {
         if ((command.getName().equalsIgnoreCase("napalm"))
                 && ((sender instanceof Player))) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.napalm")) {
+            if (this.me.hasPluginPermission(player, "napalm")) {
                 if (args.length == 1) {
                     Player target = this.me.getServer().getPlayer(args[0]);
                     if (target != null) {

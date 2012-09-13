@@ -20,7 +20,7 @@ public class DivineArmCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.divinearm")) {
+            if (this.me.hasPluginPermission(player, "divinearm")) {
                 if (this.me.aDivine.contains(player)) {
                     this.me.aDivine.remove(player);
                     player.removePotionEffect(PotionEffectType.FAST_DIGGING);

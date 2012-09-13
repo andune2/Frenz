@@ -70,6 +70,8 @@ import com.live.macsephi.Speed.HyperSpeedCommand;
 import com.live.macsephi.Speed.SuperSpeedCommand;
 
 public class Frenz extends JavaPlugin {
+    private static final String PERMISSION_BASE = "Frenz.";
+    
     private Logger log;
     
     public FileConfiguration config;
@@ -176,8 +178,8 @@ public class Frenz extends JavaPlugin {
         }
     }
 
-    public boolean hasPermission(Player player, String node) {
-        return player.hasPermission(node);
+    public boolean hasPluginPermission(Player player, String node) {
+        return player.hasPermission(PERMISSION_BASE+node);
     }
 
     private void checkConfig() {

@@ -21,7 +21,7 @@ public class HiSpeedCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             this.player = ((Player) sender);
-            if (me.hasPermission(this.player, "MobEffects.hispeed")) {
+            if (me.hasPluginPermission(this.player, "hispeed")) {
                 this.me.setMobEffect(this.player, 1, 3000, 2);
                 this.me.getServer().getScheduler()
                         .scheduleSyncDelayedTask(this.me, new Runnable() {

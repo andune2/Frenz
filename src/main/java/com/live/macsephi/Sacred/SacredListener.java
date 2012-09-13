@@ -27,7 +27,7 @@ public class SacredListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
-        if (this.me.hasPermission(player, "MobEffects.sacredwool"))
+        if (this.me.hasPluginPermission(player, "sacredwool"))
             return;
 
         if (this.config.getString("SacredWool.World") == null)

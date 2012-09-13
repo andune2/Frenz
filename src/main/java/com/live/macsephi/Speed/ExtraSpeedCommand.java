@@ -21,7 +21,7 @@ public class ExtraSpeedCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             this.player = ((Player) sender);
-            if (me.hasPermission(this.player, "MobEffects.extraspeed")) {
+            if (me.hasPluginPermission(this.player, "extraspeed")) {
                 this.me.setMobEffect(this.player, 1, 1200, 1);
                 this.me.getServer().getScheduler()
                         .scheduleSyncDelayedTask(this.me, new Runnable() {

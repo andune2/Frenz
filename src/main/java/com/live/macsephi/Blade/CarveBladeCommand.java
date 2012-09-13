@@ -19,7 +19,7 @@ public class CarveBladeCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.carveblade")) {
+            if (this.me.hasPluginPermission(player, "carveblade")) {
                 if (this.me.carve.contains(player)) {
                     this.me.carve.remove(player);
                     player.sendMessage(ChatColor.BLUE

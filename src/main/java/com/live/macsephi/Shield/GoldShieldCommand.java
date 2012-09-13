@@ -19,7 +19,7 @@ public class GoldShieldCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.plugin.hasPermission(player, "MobEffects.goldshield")) {
+            if (this.plugin.hasPluginPermission(player, "goldshield")) {
                 if (this.plugin.gold.contains(player)) {
                     this.plugin.gold.remove(player);
                     player.sendMessage(ChatColor.BLUE

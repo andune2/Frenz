@@ -19,7 +19,7 @@ public class DivineBladeCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.divineblade")) {
+            if (this.me.hasPluginPermission(player, "divineblade")) {
                 if (this.me.bDivine.contains(player)) {
                     this.me.bDivine.remove(player);
                     player.sendMessage(ChatColor.YELLOW

@@ -20,7 +20,7 @@ public class DivineSpeedCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             this.player = ((Player) sender);
-            if (me.hasPermission(this.player, "MobEffects.divinespeed")) {
+            if (me.hasPluginPermission(this.player, "divinespeed")) {
                 if (this.me.sDivine.contains(this.player)) {
                     this.me.removeMobEffect(this.player, 1);
                     this.me.sDivine.remove(this.player);

@@ -19,7 +19,7 @@ public class ReloadMeCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.reload")) {
+            if (this.me.hasPluginPermission(player, "reload")) {
                 this.me.reloadConfig();
                 player.sendMessage(ChatColor.BLUE
                         + "[MobEffects] Config has been reloaded.");

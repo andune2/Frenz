@@ -19,7 +19,7 @@ public class StrengthArmCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.strengtharm")) {
+            if (this.me.hasPluginPermission(player, "strengtharm")) {
                 this.me.setMobEffect(player, 3, 1200, 1);
                 player.sendMessage(ChatColor.BLUE
                         + "Your arms feel as though you worked out for several hours, improving your use of tools.");

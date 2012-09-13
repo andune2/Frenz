@@ -19,7 +19,7 @@ public class WoodShieldCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.plugin.hasPermission(player, "MobEffects.woodshield")) {
+            if (this.plugin.hasPluginPermission(player, "woodshield")) {
                 if (this.plugin.wood.contains(player)) {
                     this.plugin.wood.remove(player);
                     player.sendMessage(ChatColor.BLUE

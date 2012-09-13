@@ -19,7 +19,7 @@ public class SliceCommand implements CommandExecutor {
             String label, String[] args) {
         Player player = (Player) sender;
         if ((sender instanceof Player)) {
-            if (this.me.hasPermission(player, "MobEffects.slice")) {
+            if (this.me.hasPluginPermission(player, "slice")) {
                 if (player.getHealth() <= 5) {
                     this.me.isEmo.add(player);
                     player.setHealth(0);

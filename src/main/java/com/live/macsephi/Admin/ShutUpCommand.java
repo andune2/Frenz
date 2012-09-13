@@ -15,16 +15,14 @@ public class ShutUpCommand implements CommandExecutor {
         this.me = me;
     }
 
-    public boolean onCommand(CommandSender sender, Command command,
-            String label, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.shutup")) {
+            if (this.me.hasPluginPermission(player, "shutup")) {
                 if ((args.length == 1)
                         && (this.me.getServer().getPlayer(args[0]) != null)) {
                     Player target = this.me.getServer().getPlayer(args[0]);
-                    if (this.me.hasPermission(target,
-                            "MobEffects.shutup.immunity")) {
+                    if (this.me.hasPluginPermission(target, "shutup.immunity")) {
                         player.sendMessage(ChatColor.DARK_RED
                                 + target.getName() + " cannot be silenced!");
                         return true;

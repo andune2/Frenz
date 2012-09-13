@@ -74,15 +74,15 @@ public class MEListener implements Listener {
     public void onFoodLevelChange(FoodLevelChangeEvent event) {
         if ((event.getEntity() instanceof Player)) {
             Player player = (Player) event.getEntity();
-            if (this.me.hasPermission(player, "MobEffects.food.freeze"))
+            if (this.me.hasPluginPermission(player, "food.freeze"))
                 event.setCancelled(true);
         }
     }
 
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onEnchant(EnchantItemEvent event) {
-        if (this.me.hasPermission(event.getEnchanter(),
-                "MobEffects.discountenchant")) {
+        if (this.me.hasPluginPermission(event.getEnchanter(),
+                "discountenchant")) {
             double cost = event.getExpLevelCost();
             double discount = this.me.config
                     .getDouble("Enchantments.DiscountedCost(%)") / 100.0D;

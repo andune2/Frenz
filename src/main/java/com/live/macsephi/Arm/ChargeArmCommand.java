@@ -19,7 +19,7 @@ public class ChargeArmCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.chargearm")) {
+            if (this.me.hasPluginPermission(player, "chargearm")) {
                 this.me.setMobEffect(player, 3, 3000, 2);
                 player.sendMessage(ChatColor.BLUE
                         + "Your arms feel charged, as if electrified with extra energy.");

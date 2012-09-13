@@ -19,7 +19,7 @@ public class FrenzyArmCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.frenzyarm")) {
+            if (this.me.hasPluginPermission(player, "frenzyarm")) {
                 this.me.setMobEffect(player, 3, 7800, 4);
                 player.sendMessage(ChatColor.BLUE
                         + "Your arms enter a state of ballistic anomally, granting you unfathomable dexterity with your tools.");

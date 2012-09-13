@@ -19,7 +19,7 @@ public class IronShieldCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.plugin.hasPermission(player, "MobEffects.ironshield")) {
+            if (this.plugin.hasPluginPermission(player, "ironshield")) {
                 if (this.plugin.iron.contains(player)) {
                     this.plugin.iron.remove(player);
                     player.sendMessage(ChatColor.BLUE

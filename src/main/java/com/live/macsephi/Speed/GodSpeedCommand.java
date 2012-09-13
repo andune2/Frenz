@@ -21,7 +21,7 @@ public class GodSpeedCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             this.player = ((Player) sender);
-            if (me.hasPermission(this.player, "MobEffects.godspeed")) {
+            if (me.hasPluginPermission(this.player, "godspeed")) {
                 this.me.setMobEffect(this.player, 1, 9600, 5);
                 this.me.getServer().getScheduler()
                         .scheduleSyncDelayedTask(this.me, new Runnable() {

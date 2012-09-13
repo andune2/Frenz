@@ -19,7 +19,7 @@ public class CurseCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if ((this.me.hasPermission(player, "MobEffects.curse"))
+            if ((this.me.hasPluginPermission(player, "curse"))
                     && ((args.length == 0) || (this.me.getServer().getPlayer(
                             args[0]) == player))) {
                 this.me.setMobEffect(player, 19, 6000, 3);
@@ -27,7 +27,7 @@ public class CurseCommand implements CommandExecutor {
                         + "You have cursed yourself with a poisonous spell!");
                 return true;
             }
-            if ((this.me.hasPermission(player, "MobEffects.curse.other"))
+            if ((this.me.hasPluginPermission(player, "curse.other"))
                     && (this.me.getServer().getPlayer(args[0]) != player)
                     && (args.length == 1) && (!args[0].equalsIgnoreCase("off"))) {
                 if (this.me.getServer().getPlayer(args[0]) == null) {
@@ -51,7 +51,7 @@ public class CurseCommand implements CommandExecutor {
                 return true;
             }
             if ((args[0].equalsIgnoreCase("off"))
-                    && (this.me.hasPermission(player, "MobEffects.uncurse"))
+                    && (this.me.hasPluginPermission(player, "uncurse"))
                     && ((args.length == 1) || (this.me.getServer().getPlayer(
                             args[1]) == player))) {
                 this.me.removeMobEffect(player, 19);
@@ -60,8 +60,8 @@ public class CurseCommand implements CommandExecutor {
                 return true;
             }
             if ((args[0].equalsIgnoreCase("off"))
-                    && (this.me.hasPermission(player,
-                            "MobEffects.uncurse.other")) && (args.length == 2)) {
+                    && (this.me.hasPluginPermission(player,
+                            "uncurse.other")) && (args.length == 2)) {
                 if (this.me.getServer().getPlayer(args[1]) == null) {
                     player.sendMessage(ChatColor.RED + "Player does not exist!");
                     return false;

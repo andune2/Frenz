@@ -21,7 +21,7 @@ public class FoodCommand implements CommandExecutor {
             Player player = (Player) sender;
             if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("fitforaking")) {
-                    if (this.me.hasPermission(player, "MobEffects.food.king")) {
+                    if (this.me.hasPluginPermission(player, "food.king")) {
                         player.setFoodLevel(20);
                         player.sendMessage(ChatColor.GREEN
                                 + "Your food bar has been filled!");
@@ -32,7 +32,7 @@ public class FoodCommand implements CommandExecutor {
                 }
 
                 if (args[0].equalsIgnoreCase("snack")) {
-                    if (this.me.hasPermission(player, "MobEffects.food.snack")) {
+                    if (this.me.hasPluginPermission(player, "food.snack")) {
                         if (player.getFoodLevel() > 14) {
                             player.setFoodLevel(20);
                         }
@@ -46,7 +46,7 @@ public class FoodCommand implements CommandExecutor {
                 }
 
                 if (args[0].equalsIgnoreCase("meal")) {
-                    if (this.me.hasPermission(player, "MobEffects.food.meal")) {
+                    if (this.me.hasPluginPermission(player, "food.meal")) {
                         if (player.getFoodLevel() > 10) {
                             player.setFoodLevel(20);
                         }

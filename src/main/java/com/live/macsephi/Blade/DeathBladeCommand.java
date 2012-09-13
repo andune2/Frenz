@@ -19,7 +19,7 @@ public class DeathBladeCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.deathblade")) {
+            if (this.me.hasPluginPermission(player, "deathblade")) {
                 if (this.me.death.contains(player)) {
                     this.me.death.remove(player);
                     player.sendMessage(ChatColor.BLACK

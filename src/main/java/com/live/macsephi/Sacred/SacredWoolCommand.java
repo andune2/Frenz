@@ -23,7 +23,7 @@ public class SacredWoolCommand implements CommandExecutor {
             String label, String[] args) {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
-            if (this.me.hasPermission(player, "MobEffects.sacredwool")) {
+            if (this.me.hasPluginPermission(player, "sacredwool")) {
                 if (args.length == 1) {
                     if (args[0].equalsIgnoreCase("1")) {
                         Location loc = player.getLocation();

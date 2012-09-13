@@ -20,7 +20,7 @@ public class SuperDistortCommand implements CommandExecutor {
         if ((sender instanceof Player)) {
             Player player = (Player) sender;
             if (args.length == 1) {
-                if (this.me.hasPermission(player, "MobEffects.superdistort")) {
+                if (this.me.hasPluginPermission(player, "superdistort")) {
                     if (this.me.getServer().getPlayer(args[0]) == null) {
                         player.sendMessage(ChatColor.RED
                                 + "Player does not exist");
