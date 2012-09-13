@@ -32,6 +32,8 @@ public class BetterChatWrapper
     private static final int CHAT_WINDOW_WIDTH = 320;
     private static final int CHAT_STRING_LENGTH = 119;
     */
+    //Mackenzie - Understood exactly why as well, didn't have to research a thing! More forgotten code
+    // it appears. :p
 
     public static String[] wrapText(String text)
     {

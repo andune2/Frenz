@@ -15,7 +15,12 @@
 *             getCommand("implode").setExecutor(this.boomExecutor);
 * while implementing more removal changes. Changes include a small back door in KitExecutor class, removal of
 * the /implode command and its functions, with a small inquiry in the AdminListener class (comment). Second
-* plugin test has it functioning fully once again! 
+* plugin test has it functioning fully once again!
+* 
+* Commit 6: Quite a few larger changes this time, main listener class MEListener deleted and appropriately
+* replaced with FrenzListener, all ties to the changes successfully cleaned up without error or warning, and
+* same applies to the other changes, which includes removing AztecListener class and RecipeHandler class, making
+* necessary changes to compensate within the main Frenz class. Updated plugin.yml
 */
 package com.live.macsephi;
 
@@ -114,8 +119,11 @@ public class Frenz extends JavaPlugin {
     public ArrayList<Player> bDivine = new ArrayList<Player>();
     public ArrayList<Player> sDivine = new ArrayList<Player>();
     public ArrayList<Player> aDivine = new ArrayList<Player>();
+    //Mackenzie - Where are these two arrays used elsewhere? "isEmo, isOwner"
     public ArrayList<Player> isEmo = new ArrayList<Player>();
     public ArrayList<Player> isOwner = new ArrayList<Player>();
+    //Mackenzie - Is this array "death" used anywhere since you cleaned out death messages? Things to consider:
+    //DeathBladeCommand, BladeListener, Shield commands.
     public ArrayList<Player> death = new ArrayList<Player>();
     public ArrayList<Player> isSlain = new ArrayList<Player>();
     
@@ -130,11 +138,10 @@ public class Frenz extends JavaPlugin {
         checkConfig();
         registerCommands();
         PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(new MEListener(this), this);
+        pm.registerEvents(new FrenzListener(this), this);
         //Mackenzie - Removed SacredListener registerEvents
         pm.registerEvents(new BladeListener(this), this);
         pm.registerEvents(new AdminListener(this, this.config), this);
-        pm.registerEvents(new AztecListener(), this);
 
         log.info("version "+getDescription().getVersion()+" has been Enabled!");
     }

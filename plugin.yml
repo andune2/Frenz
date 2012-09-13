@@ -1,6 +1,6 @@
 name: Frenz
 main: com.live.macsephi.Frenz
-version: 0.77
+version: 0.85
 author: Mackenzie
 mentor: Andune
 commands:
@@ -22,10 +22,6 @@ commands:
     description: Wield the power of death.
   boom:
     description: Make things go boom.
-  punish:
-    description: Punish misbehaving players.
-  free:
-    description: Free a player from punishment.
   superdistort:
     description: Distortion that ignores immunity.
   "off":
@@ -106,13 +102,7 @@ permissions:
     description: This is a description.
   MobEffects.deathblade:
     description: This is a description.
-  MobEffects.ownerit:
-    description: This is a description.
   MobEffects.boom:
-    description: This is a description.
-  MobEffects.punish:
-    description: This is a description.
-  MobEffects.free:
     description: This is a description.
   MobEffects.superdistort:
     description: This is a description.
