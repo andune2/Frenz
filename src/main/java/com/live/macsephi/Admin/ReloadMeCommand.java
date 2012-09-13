@@ -29,7 +29,7 @@ public class ReloadMeCommand implements CommandExecutor {
                     + "You don't have permission to use this command.");
         } else {
             this.me.reloadConfig();
-            Frenz.log.info("[MobEffects] Config has been reloaded.");
+            me.getLogger().info("[MobEffects] Config has been reloaded.");
             return true;
         }
         return false;

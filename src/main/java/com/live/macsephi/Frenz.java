@@ -14,7 +14,6 @@ import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.MobEffect;
 import net.minecraft.server.Packet42RemoveMobEffect;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -71,7 +70,8 @@ import com.live.macsephi.Speed.HyperSpeedCommand;
 import com.live.macsephi.Speed.SuperSpeedCommand;
 
 public class Frenz extends JavaPlugin {
-    public static final Logger log = Bukkit.getLogger();
+    private Logger log;
+    
     public FileConfiguration config;
     private File configFile;
     protected boolean disableFireCharges;
@@ -105,9 +105,10 @@ public class Frenz extends JavaPlugin {
     private final CommandExecutor kitExecutor = new KitExecutor(this);
 
     public void onEnable() {
+        log = getLogger();
+        
         checkConfig();
         registerCommands();
-        setupPermissions();
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new MEListener(this), this);
         pm.registerEvents(new SacredListener(this, this.config), this);
@@ -115,11 +116,11 @@ public class Frenz extends JavaPlugin {
         pm.registerEvents(new AdminListener(this, this.config), this);
         pm.registerEvents(new AztecListener(), this);
 
-        log.info("Fyre's [MobEffects] has been Enabled!");
+        log.info("version "+getDescription().getVersion()+" has been Enabled!");
     }
 
     public void onDisable() {
-        log.info("Fyre's [MobEffects] has been Disabled!");
+        log.info("version "+getDescription().getVersion()+" has been Disabled!");
     }
 
     private void registerCommands() {
@@ -175,16 +176,7 @@ public class Frenz extends JavaPlugin {
         }
     }
 
-    private void setupPermissions() {
-        // do nothing - use superperms
-    }
-
     public boolean hasPermission(Player player, String node) {
-        return player.hasPermission(node);
-    }
-
-    @Deprecated
-    public static boolean hasPermissions(Player player, String node) {
         return player.hasPermission(node);
     }
 
