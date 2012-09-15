@@ -41,7 +41,6 @@ import net.minecraft.server.EntityLiving;
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.MobEffect;
 import net.minecraft.server.Packet42RemoveMobEffect;
-//Mackenzie - Does this import have to do with the HashMap?
 
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -59,15 +58,9 @@ import com.live.macsephi.Admin.BoomExecutor;
 import com.live.macsephi.Admin.KitExecutor;
 import com.live.macsephi.Admin.ReloadFrenzCommand;
 import com.live.macsephi.Admin.ShutUpCommand;
-import com.live.macsephi.MiningCommands;
-import com.live.macsephi.Blade.CarveBladeCommand;
-import com.live.macsephi.Blade.DeathBladeCommand;
-import com.live.macsephi.Blade.DivineBladeCommand;
-import com.live.macsephi.Blade.ExtendBladeCommand;
-import com.live.macsephi.Blade.SerrateBladeCommand;
-import com.live.macsephi.Blade.SharpenBladeCommand;
-import com.live.macsephi.Blade.TemperBladeCommand;
-import com.live.macsephi.MiscCommands.CureCommand;
+import com.live.macsephi.Workers;
+import com.live.macsephi.Heroes;
+import com.live.macsephi.Mages;
 import com.live.macsephi.MiscCommands.CureMoreCommand;
 import com.live.macsephi.MiscCommands.CurseCommand;
 import com.live.macsephi.MiscCommands.DistortCommand;
@@ -76,13 +69,7 @@ import com.live.macsephi.MiscCommands.FullRestoreCommand;
 import com.live.macsephi.MiscCommands.OffCommand;
 import com.live.macsephi.MiscCommands.SliceCommand;
 import com.live.macsephi.MiscCommands.SuperDistortCommand;
-import com.live.macsephi.Shield.DiamondShieldCommand;
-import com.live.macsephi.Shield.GoldShieldCommand;
-import com.live.macsephi.Shield.IronShieldCommand;
-import com.live.macsephi.Shield.ObsidianShieldCommand;
-import com.live.macsephi.Shield.StoneShieldCommand;
-import com.live.macsephi.Shield.WoodShieldCommand;
-import com.live.macsephi.SpeedCommands;
+import com.live.macsephi.Thieves;
 
 public class Frenz extends JavaPlugin {
     private static final String PERMISSION_BASE = "Frenz.";
@@ -94,17 +81,23 @@ public class Frenz extends JavaPlugin {
     protected boolean disableFireCharges;
     public ArrayList<TNTPrimed> tntPrimed = new ArrayList<TNTPrimed>();
     public ArrayList<TNTPrimed> napalm = new ArrayList<TNTPrimed>();
-    public ArrayList<Player> obsidian = new ArrayList<Player>();
-    public ArrayList<Player> wood = new ArrayList<Player>();
-    public ArrayList<Player> stone = new ArrayList<Player>();
-    public ArrayList<Player> iron = new ArrayList<Player>();
-    public ArrayList<Player> diamond = new ArrayList<Player>();
-    public ArrayList<Player> gold = new ArrayList<Player>();
-    public ArrayList<Player> carve = new ArrayList<Player>();
-    public ArrayList<Player> sharpen = new ArrayList<Player>();
-    public ArrayList<Player> serrate = new ArrayList<Player>();
-    public ArrayList<Player> extend = new ArrayList<Player>();
-    public ArrayList<Player> temper = new ArrayList<Player>();
+    public ArrayList<Player> Shield = new ArrayList<Player>();
+    public ArrayList<Player> dBetter = new ArrayList<Player>();
+    public ArrayList<Player> dSuper = new ArrayList<Player>();
+    public ArrayList<Player> dHyper = new ArrayList<Player>();
+    public ArrayList<Player> dGod = new ArrayList<Player>();
+    public ArrayList<Player> dDivine = new ArrayList<Player>();
+    public ArrayList<Player> Miner = new ArrayList<Player>();
+    public ArrayList<Player> mBetter = new ArrayList<Player>();
+    public ArrayList<Player> mSuper = new ArrayList<Player>();
+    public ArrayList<Player> mHyper = new ArrayList<Player>();
+    public ArrayList<Player> mGod = new ArrayList<Player>();
+    public ArrayList<Player> mDivine = new ArrayList<Player>();
+    public ArrayList<Player> bBrawn = new ArrayList<Player>();
+    public ArrayList<Player> bBetter = new ArrayList<Player>();
+    public ArrayList<Player> bSuper = new ArrayList<Player>();
+    public ArrayList<Player> bHyper = new ArrayList<Player>();
+    public ArrayList<Player> bGod = new ArrayList<Player>();
     public ArrayList<Player> bDivine = new ArrayList<Player>();
     public ArrayList<Player> sDivine = new ArrayList<Player>();
     public ArrayList<Player> sGod = new ArrayList<Player>();
@@ -112,8 +105,7 @@ public class Frenz extends JavaPlugin {
     public ArrayList<Player> sSuper = new ArrayList<Player>();
     public ArrayList<Player> sHi = new ArrayList<Player>();
     public ArrayList<Player> sSpeed = new ArrayList<Player>();
-    public ArrayList<Player> death = new ArrayList<Player>();
-    public ArrayList<Player> isSlain = new ArrayList<Player>();
+    public ArrayList<Player> DeathStrike = new ArrayList<Player>();
     
     public List<Player> isMuted = Collections.synchronizedList(new ArrayList<Player>());
 
@@ -147,39 +139,41 @@ public class Frenz extends JavaPlugin {
             getCommand("superdistort").setExecutor(new SuperDistortCommand(this));
             getCommand("slice").setExecutor(new SliceCommand(this));
             getCommand("curse").setExecutor(new CurseCommand(this));
-            getCommand("cure").setExecutor(new CureCommand(this));
+            getCommand("cure").setExecutor(new Mages(this));
             getCommand("curemore").setExecutor(new CureMoreCommand(this));
             getCommand("fullrestore").setExecutor(new FullRestoreCommand(this));
-            getCommand("carveblade").setExecutor(new CarveBladeCommand(this));
-            getCommand("sharpenblade").setExecutor(new SharpenBladeCommand(this));
-            getCommand("serrateblade").setExecutor(new SerrateBladeCommand(this));
-            getCommand("extendblade").setExecutor(new ExtendBladeCommand(this));
-            getCommand("temperblade").setExecutor(new TemperBladeCommand(this));
-            getCommand("divineblade").setExecutor(new DivineBladeCommand(this));
-            getCommand("miner").setExecutor(new MiningCommands(this));
-            getCommand("betterminer").setExecutor(new MiningCommands(this));
-            getCommand("superminer").setExecutor(new MiningCommands(this));
-            getCommand("hyperminer").setExecutor(new MiningCommands(this));
-            getCommand("godminer").setExecutor(new MiningCommands(this));
-            getCommand("divineminer").setExecutor(new MiningCommands(this));
-            getCommand("speed").setExecutor(new SpeedCommands(this));
-            getCommand("hispeed").setExecutor(new SpeedCommands(this));
-            getCommand("superspeed").setExecutor(new SpeedCommands(this));
-            getCommand("hyperspeed").setExecutor(new SpeedCommands(this));
-            getCommand("godspeed").setExecutor(new SpeedCommands(this));
-            getCommand("divinespeed").setExecutor(new SpeedCommands(this));
+            getCommand("brawn").setExecutor(new Heroes(this));
+            getCommand("betterbrawn").setExecutor(new Heroes(this));
+            getCommand("superbrawn").setExecutor(new Heroes(this));
+            getCommand("hyperbrawn").setExecutor(new Heroes(this));
+            getCommand("godbrawn").setExecutor(new Heroes(this));
+            getCommand("divinebrawn").setExecutor(new Heroes(this));
+            getCommand("deathstrike").setExecutor(new Heroes(this));
+            getCommand("miner").setExecutor(new Workers(this));
+            getCommand("betterminer").setExecutor(new Workers(this));
+            getCommand("superminer").setExecutor(new Workers(this));
+            getCommand("hyperminer").setExecutor(new Workers(this));
+            getCommand("godminer").setExecutor(new Workers(this));
+            getCommand("divineminer").setExecutor(new Workers(this));
+            getCommand("speed").setExecutor(new Thieves(this));
+            getCommand("hispeed").setExecutor(new Thieves(this));
+            getCommand("superspeed").setExecutor(new Thieves(this));
+            getCommand("hyperspeed").setExecutor(new Thieves(this));
+            getCommand("godspeed").setExecutor(new Thieves(this));
+            getCommand("divinespeed").setExecutor(new Thieves(this));
+            getCommand("onspeed").setExecutor(new Thieves(this));
             getCommand("off").setExecutor(new OffCommand(this));
-            getCommand("woodshield").setExecutor(new WoodShieldCommand(this));
-            getCommand("stoneshield").setExecutor(new StoneShieldCommand(this));
-            getCommand("goldshield").setExecutor(new GoldShieldCommand(this));
-            getCommand("ironshield").setExecutor(new IronShieldCommand(this));
-            getCommand("diamondshield").setExecutor(new DiamondShieldCommand(this));
-            getCommand("obsidianshield").setExecutor(new ObsidianShieldCommand(this));
-            getCommand("deathblade").setExecutor(new DeathBladeCommand(this));
+            getCommand("shield").setExecutor(new Heroes(this));
+            getCommand("bettershield").setExecutor(new Heroes(this));
+            getCommand("supershield").setExecutor(new Heroes(this));
+            getCommand("hypershield").setExecutor(new Heroes(this));
+            getCommand("godshield").setExecutor(new Heroes(this));
+            getCommand("divineshield").setExecutor(new Heroes(this));
             getCommand("freload").setExecutor(new ReloadFrenzCommand(this));
             getCommand("food").setExecutor(new FoodCommand(this));
         } catch (Exception e) {
             log.warning("[MobEffects] ERROR " + e);
+            e.printStackTrace();
         }
     }
 
@@ -206,10 +200,6 @@ public class Frenz extends JavaPlugin {
         }
 
         this.disableFireCharges = this.config.getBoolean("DisableFireCharges", true);
-        // Mackenzie - I have some research to do on config.yml. If you have any advice on it for a beginner, I'd
-        //most certainly appreciate any given. I understand the DisableFireCharges, but this brings us back to
-        //do I want to change my own oil, or know how the deeper mechanisms work? We both know it is the deeper
-        //mechanisms/mechanics.
         saveConfig();
 }
 
@@ -236,29 +226,21 @@ public class Frenz extends JavaPlugin {
             log.severe("[MobEffects] ERROR could not save config.yml\r\n" + e);
         }
     }
-    public void removeMobEffect(LivingEntity entity, int type) {
-        try {
-            if ((entity instanceof Player)) {
-                EntityPlayer player = ((CraftPlayer) entity).getHandle();
-                player.netServerHandler.sendPacket(new Packet42RemoveMobEffect(
-                        player.id, new MobEffect(type, 0, 0)));
-            }
-            Field field = EntityLiving.class.getDeclaredField("effects");
-            field.setAccessible(true);
-
-            //Mackenzie - I see you had to supress the warnings. Could you suggest a way for me to test this
-            //particular function is still working correctly? I'm still trying to wrap my finger around the whole
-            //HashMap system, its purpose and functionality.
-            @SuppressWarnings("rawtypes")
-            HashMap effects = (HashMap) field.get(((CraftLivingEntity) entity)
-                    .getHandle());
-            effects.remove(Integer.valueOf(type));
-        } catch (Exception localException) {
-        }
-    }
-    public void setMobEffect(LivingEntity entity, int type, int duration,
-            int amplifier) {
-        ((CraftLivingEntity) entity).getHandle().addEffect(
-                new MobEffect(type, duration, amplifier));
-    }
+	public void setPotion(LivingEntity entity, int type, int duration, int amplifier) {
+		((CraftLivingEntity) entity).getHandle().addEffect(new MobEffect(type, duration, amplifier));
+	}
+	public void unsetPotion(LivingEntity entity, int type) {
+		try {
+			if ((entity instanceof Player)) {
+				EntityPlayer player = ((CraftPlayer) entity).getHandle();
+				player.netServerHandler.sendPacket(new Packet42RemoveMobEffect(player.id, new MobEffect(type, 0, 0)));
+			}
+			Field field = EntityLiving.class.getDeclaredField("effects");
+			field.setAccessible(true);
+			@SuppressWarnings("rawtypes")
+			HashMap effects = (HashMap) field.get(((CraftLivingEntity) entity).getHandle());
+			effects.remove(Integer.valueOf(type));
+		} catch (Exception localException) {
+		}
+	}
 }

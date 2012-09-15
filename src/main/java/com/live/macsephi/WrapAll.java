@@ -2,7 +2,7 @@ package com.live.macsephi;
 
 import net.minecraft.server.SharedConstants;
 
-public class BetterChatWrapper
+public class WrapAll
 {
     private static final int[] characterWidths = { 
         1, 9, 9, 8, 8, 8, 8, 7, 9, 8, 9, 9, 8, 9, 9, 9, 

@@ -2,17 +2,13 @@ package com.live.macsephi;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-//Mackenzie - I LOVE how Maven is adding these automatically. Less work for me. ^.^;
 import org.bukkit.entity.EnderDragonPart;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Snowman;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBurnEvent;
-import org.bukkit.event.block.EntityBlockFormEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
@@ -36,13 +32,6 @@ public class FrenzListener implements Listener {
         if ((event.getMaterial() == Material.FIREBALL)
                 || (event.getItem().getTypeId() == 385)) {
             event.setUseItemInHand(PlayerInteractEvent.Result.DENY);
-            event.setCancelled(true);
-        }
-    }
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onEntityBlockForm(EntityBlockFormEvent event) {
-        if (((event.getEntity() instanceof Snowman))
-                || (event.getEntity().getType() == EntityType.SNOWMAN)) {
             event.setCancelled(true);
         }
     }
@@ -93,11 +82,9 @@ public class FrenzListener implements Listener {
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onBladeEvent(EntityDamageByEntityEvent event) {
         if (((event.getDamager() instanceof Player))
-                && (this.me.death.contains(event.getDamager()))) {
+                && (this.me.DeathStrike.contains(event.getDamager()))) {
+			this.me.DeathStrike.remove(event.getDamager());
             event.setDamage(event.getDamage() * 5000);
-            if ((event.getEntity() instanceof Player)) {
-                this.me.isSlain.add((Player) event.getEntity());
-            }
             return;
         }
 
@@ -117,7 +104,7 @@ public class FrenzListener implements Listener {
         }
 
         Player player = (Player) event.getEntity();
-        if (this.me.obsidian.contains(player)) {
+        if (this.me.dDivine.contains(player)) {
             int finalDamage = (int) (damage * 0.15D);
             if (finalDamage > 20)
                 event.setDamage(20);
@@ -125,7 +112,7 @@ public class FrenzListener implements Listener {
                 event.setDamage(finalDamage);
             return;
         }
-        if (this.me.diamond.contains(player)) {
+        if (this.me.dGod.contains(player)) {
             int finalDamage = (int) (damage * 0.5D);
             if (finalDamage > 20)
                 event.setDamage(20);
@@ -133,7 +120,7 @@ public class FrenzListener implements Listener {
                 event.setDamage(finalDamage);
             return;
         }
-        if (this.me.iron.contains(player)) {
+        if (this.me.dHyper.contains(player)) {
             int finalDamage = (int) (damage * 0.6D);
             if (finalDamage > 20)
                 event.setDamage(20);
@@ -141,7 +128,7 @@ public class FrenzListener implements Listener {
                 event.setDamage(finalDamage);
             return;
         }
-        if (this.me.gold.contains(player)) {
+        if (this.me.dSuper.contains(player)) {
             int finalDamage = (int) (damage * 0.7D);
             if (finalDamage > 20)
                 event.setDamage(20);
@@ -149,7 +136,7 @@ public class FrenzListener implements Listener {
                 event.setDamage(finalDamage);
             return;
         }
-        if (this.me.stone.contains(player)) {
+        if (this.me.dBetter.contains(player)) {
             int finalDamage = (int) (damage * 0.8D);
             if (finalDamage > 20)
                 event.setDamage(20);
@@ -157,7 +144,7 @@ public class FrenzListener implements Listener {
                 event.setDamage(finalDamage);
             return;
         }
-        if (this.me.wood.contains(player)) {
+        if (this.me.Shield.contains(player)) {
             int finalDamage = (int) (damage * 0.9D);
             if (finalDamage > 20)
                 event.setDamage(20);
@@ -170,15 +157,15 @@ public class FrenzListener implements Listener {
     public int getNewDamage(int damage, Player attacker) {
         if (this.me.bDivine.contains(attacker))
             return damage + 50;
-        if (this.me.temper.contains(attacker))
+        if (this.me.bGod.contains(attacker))
             return damage + 20;
-        if (this.me.extend.contains(attacker))
+        if (this.me.bHyper.contains(attacker))
             return damage + 16;
-        if (this.me.serrate.contains(attacker))
+        if (this.me.bSuper.contains(attacker))
             return damage + 12;
-        if (this.me.sharpen.contains(attacker))
+        if (this.me.bBetter.contains(attacker))
             return damage + 8;
-        if (this.me.carve.contains(attacker))
+        if (this.me.bBrawn.contains(attacker))
             return damage + 4;
         return damage;
     }

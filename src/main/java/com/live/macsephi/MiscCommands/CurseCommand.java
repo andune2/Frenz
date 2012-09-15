@@ -1,9 +1,16 @@
 package com.live.macsephi.MiscCommands;
 
+import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.MobEffect;
+import net.minecraft.server.Packet42RemoveMobEffect;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import com.live.macsephi.Frenz;
@@ -14,7 +21,16 @@ public class CurseCommand implements CommandExecutor {
     public CurseCommand(Frenz me) {
         this.me = me;
     }
-
+    
+    public void setMobEffect(LivingEntity entity, int type, int duration, int amplifier) {
+        ((CraftLivingEntity) entity).getHandle().addEffect(new MobEffect(type, duration, amplifier));
+    }
+    public void removeMobEffect(LivingEntity entity, int type) {
+            if ((entity instanceof Player)) {
+                EntityPlayer player = ((CraftPlayer) entity).getHandle();
+                player.netServerHandler.sendPacket(new Packet42RemoveMobEffect(player.id, new MobEffect(type, 0, 0)));
+            }
+            }
     public boolean onCommand(CommandSender sender, Command command,
             String label, String[] args) {
         if ((sender instanceof Player)) {
@@ -22,7 +38,7 @@ public class CurseCommand implements CommandExecutor {
             if ((this.me.hasPluginPermission(player, "curse"))
                     && ((args.length == 0) || (this.me.getServer().getPlayer(
                             args[0]) == player))) {
-                this.me.setMobEffect(player, 19, 6000, 3);
+                this.setMobEffect(player, 19, 6000, 3);
                 player.sendMessage(ChatColor.BLUE
                         + "You have cursed yourself with a poisonous spell!");
                 return true;
@@ -35,7 +51,7 @@ public class CurseCommand implements CommandExecutor {
                     return false;
                 }
                 Player target = this.me.getServer().getPlayer(args[0]);
-                this.me.setMobEffect(target, 19, 6000, 3);
+                this.setMobEffect(target, 19, 6000, 3);
                 for (Player p : this.me.getServer().getOnlinePlayers()) {
                     if (p == player) {
                         player.sendMessage(ChatColor.BLUE + "You have cursed "
@@ -54,7 +70,7 @@ public class CurseCommand implements CommandExecutor {
                     && (this.me.hasPluginPermission(player, "uncurse"))
                     && ((args.length == 1) || (this.me.getServer().getPlayer(
                             args[1]) == player))) {
-                this.me.removeMobEffect(player, 19);
+                this.removeMobEffect(player, 19);
                 player.sendMessage(ChatColor.BLUE
                         + "You have lifted your own curse.");
                 return true;
@@ -67,7 +83,7 @@ public class CurseCommand implements CommandExecutor {
                     return false;
                 }
                 Player target = this.me.getServer().getPlayer(args[1]);
-                this.me.removeMobEffect(target, 19);
+                this.removeMobEffect(target, 19);
                 target.sendMessage(ChatColor.BLUE + player.getName()
                         + " has lifted your curse!");
                 player.sendMessage(ChatColor.BLUE + "You have lifted "

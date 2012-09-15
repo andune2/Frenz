@@ -1,9 +1,13 @@
 package com.live.macsephi.MiscCommands;
 
+import net.minecraft.server.MobEffect;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.entity.CraftLivingEntity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import com.live.macsephi.Frenz;
@@ -13,6 +17,11 @@ public class SuperDistortCommand implements CommandExecutor {
 
     public SuperDistortCommand(Frenz instance) {
         this.me = instance;
+    }
+    public void setMobEffect(LivingEntity entity, int type, int duration,
+            int amplifier) {
+        ((CraftLivingEntity) entity).getHandle().addEffect(
+                new MobEffect(type, duration, amplifier));
     }
 
     public boolean onCommand(CommandSender sender, Command command,
@@ -28,7 +37,7 @@ public class SuperDistortCommand implements CommandExecutor {
                     }
                     Player targetPlayer = this.me.getServer()
                             .getPlayer(args[0]);
-                    this.me.setMobEffect(targetPlayer, 9, 1800, 5);
+                    this.setMobEffect(targetPlayer, 9, 1800, 5);
                     player.sendMessage(ChatColor.BLUE
                             + "You have somehow distorted "
                             + targetPlayer.getName() + "'s vision!");

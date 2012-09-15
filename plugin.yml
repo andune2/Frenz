@@ -1,6 +1,6 @@
 name: Frenz
 main: com.live.macsephi.Frenz
-version: 0.92.50
+version: 0.92.65
 author: Mackenzie
 mentor: Andune
 commands:
@@ -10,6 +10,8 @@ commands:
     description: A kit.
   a3:
     description: A kit.
+  onspeed:
+    description: Tests state of this Guild Ability.
   napalm:
     description: Strike a player with napalm.
   shutup:
@@ -18,7 +20,7 @@ commands:
     description: Eat food.
   freload:
     description: Reload the MobEffects config.
-  deathblade:
+  deathstrike:
     description: Wield the power of death.
   boom:
     description: Make things go boom.
@@ -38,17 +40,17 @@ commands:
     description: Heals five hearts.
   fullrestore:
     description: Heals you completely.
-  carveblade:
+  brawn:
     description: Increases your attack power.
-  sharpenblade:
+  betterbrawn:
     description: Increases your attack power.
-  serrateblade:
+  superbrawn:
     description: Increases your attack power.
-  extendblade:
+  hyperbrawn:
     description: Increases your attack power.
-  temperblade:
+  godbrawn:
     description: Increases your attack power.
-  divineblade:
+  divinebrawn:
     description: Increases your attack power.
   miner:
     description: Increases your attack speed.
@@ -74,23 +76,25 @@ commands:
     description: Increases your movement speed.
   divinespeed:
     description: Increases your movement speed.
-  woodshield:
+  shield:
     description: Enhances your defenses.
-  stoneshield:
+  bettershield:
     description: Enhances your defenses.
-  goldshield:
+  supershield:
     description: Enhances your defenses.
-  ironshield:
+  hypershield:
     description: Enhances your defenses.
-  diamondshield:
+  godshield:
     description: Enhances your defenses.
-  obsidianshield:
+  divineshield:
     description: Enhances your defenses.
 
 permissions:
   MobEffects.shutemup:
     description: This is a description.
   MobEffects.food.king:
+    description: This is a description.
+  Frenz.own.state:
     description: This is a description.
   MobEffects.food.freeze:
     description: This is a description.
@@ -100,7 +104,7 @@ permissions:
     description: This is a description.
   MobEffects.reload:
     description: This is a description.
-  MobEffects.deathblade:
+  MobEffects.deathstrike:
     description: This is a description.
   MobEffects.boom:
     description: This is a description.
@@ -162,27 +166,27 @@ permissions:
     description: This is a description.
   MobEffects.fullrestore.other:
     description: This is a description.
-  MobEffects.carveblade:
+  MobEffects.brawn:
     description: This is a description.
-  MobEffects.sharpenblade:
+  MobEffects.betterbrawn:
     description: This is a description.
-  MobEffects.serrateblade:
+  MobEffects.superbrawn:
     description: This is a description.
-  MobEffects.temperblade:
+  MobEffects.hyperbrawn:
     description: This is a description.
-  MobEffects.extendblade:
+  MobEffects.godbrawn:
     description: This is a description.
-  MobEffects.divineblade:
+  MobEffects.divinebrawn:
     description: This is a description.
   MobEffects.woodshield:
     description: This is a description.
-  MobEffects.stoneshield:
+  MobEffects.bettershield:
     description: This is a description.
-  MobEffects.goldshield:
+  MobEffects.supershield:
     description: This is a description.
-  MobEffects.ironshield:
+  MobEffects.hypershield:
     description: This is a description.
-  MobEffects.diamondshield:
+  MobEffects.godshield:
     description: This is a description.
-  MobEffects.obsidianshield:
+  MobEffects.divineshield:
     description: This is a description.

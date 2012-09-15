@@ -2,10 +2,17 @@
 
 package com.live.macsephi.MiscCommands;
 
+import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.MobEffect;
+import net.minecraft.server.Packet42RemoveMobEffect;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import com.live.macsephi.Frenz;
@@ -16,6 +23,15 @@ public class OffCommand implements CommandExecutor {
     public OffCommand(Frenz instance) {
         this.me = instance;
     }
+    public void setMobEffect(LivingEntity entity, int type, int duration, int amplifier) {
+        ((CraftLivingEntity) entity).getHandle().addEffect(new MobEffect(type, duration, amplifier));
+    }
+    public void removeMobEffect(LivingEntity entity, int type) {
+            if ((entity instanceof Player)) {
+                EntityPlayer player = ((CraftPlayer) entity).getHandle();
+                player.netServerHandler.sendPacket(new Packet42RemoveMobEffect(player.id, new MobEffect(type, 0, 0)));
+            }
+            }
 
     public boolean onCommand(CommandSender sender, Command command,
             String label, String[] args) {
@@ -34,8 +50,8 @@ public class OffCommand implements CommandExecutor {
                     if (this.me.sDivine.contains(targetPlayer)) {
                         this.me.sDivine.remove(targetPlayer);
                     }
-                    this.me.removeMobEffect(targetPlayer, 1);
-                    this.me.removeMobEffect(targetPlayer, 3);
+                    this.removeMobEffect(targetPlayer, 1);
+                    this.removeMobEffect(targetPlayer, 3);
                     targetPlayer.sendMessage(ChatColor.BLUE + player.getName()
                             + " has drained your supernatural senses.");
                     player.sendMessage(ChatColor.BLUE + "You have drained "
@@ -48,8 +64,8 @@ public class OffCommand implements CommandExecutor {
                     if (this.me.sDivine.contains(player)) {
                         this.me.sDivine.remove(player);
                     }
-                    this.me.removeMobEffect(player, 1);
-                    this.me.removeMobEffect(player, 3);
+                    this.removeMobEffect(player, 1);
+                    this.removeMobEffect(player, 3);
                     player.sendMessage(ChatColor.BLUE
                             + "You feel your supernatural senses subside.");
                     return true;
