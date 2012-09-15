@@ -5,8 +5,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import com.live.macsephi.Frenz;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class Thieves implements CommandExecutor {
 	private Frenz plugin;
@@ -27,16 +27,23 @@ public class Thieves implements CommandExecutor {
         final String cmdName = command.getName();
         
         if ((cmdName.equalsIgnoreCase("speed"))) {
+            String wornOffMessage = ChatColor.DARK_GRAY
+                    +"Y"+ChatColor.GRAY+"ou have calmed your own speed enhancement at will.";
+            
             if (plugin.hasPluginPermission(player, "speed")) {
                 if (plugin.sSpeed.contains(player)) {
-                    plugin.unsetPotion(player, 1);
+                    player.removePotionEffect(PotionEffectType.SPEED);      // remove actual effect
+                    plugin.cancelTimeout(player, PotionEffectType.SPEED);   // cancel the scheduled timer, since we turned it off manually
                     plugin.sSpeed.remove(player);
-                    player.sendMessage(ChatColor.DARK_GRAY
-                            +"Y"+ChatColor.GRAY+"ou have calmed your own speed enhancement at will.");
+                    player.sendMessage(wornOffMessage);
                 }
                 else {
-                    plugin.sSpeed.add(player);
-                    plugin.setPotion(player, 1, 1800, 1);
+                    plugin.sSpeed.add(player);  // add player to the tracked list
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1800, 1));  // add the actual effect
+                    
+                    // setup timer so the effect wears off automatically
+                    plugin.addEffectTimeout(player, PotionEffectType.SPEED, 1800, plugin.sSpeed, wornOffMessage);
+
                     player.sendMessage(ChatColor.GOLD
                             +"Y"+ChatColor.YELLOW + "ou feel a sudden sensation in your legs, as though you can" +
                             " run a marathon without breaking a sweat!");
@@ -215,4 +222,5 @@ public class Thieves implements CommandExecutor {
 
 		return true;
 	}
+	
 }
