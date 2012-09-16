@@ -57,7 +57,6 @@ public class Mages implements CommandExecutor {
 	    }
 	    
 		if ((command.getName().equalsIgnoreCase("cure"))) {
-		    PlayerInventory inv = player.getInventory();
 		    
 		    if (plugin.hasPluginPermission(player, "cure")) {
 		        if ((plugin.hasPluginPermission(player, "cure.other"))
@@ -147,7 +146,13 @@ public class Mages implements CommandExecutor {
 	            count += item.getAmount();
 	        }
 	    }
-	    
+	    /* Running the test as-as, I get an internal error when trying to use the /cure command:
+	     * Caused by: java.lang.NullPointerException
+        at com.live.macsephi.Mages.checkForItem(Mages.java:142)
+        at com.live.macsephi.Mages.onCommand(Mages.java:98)
+        at org.bukkit.command.PluginCommand.execute(PluginCommand.java:40)
+        ... 15 more
+	     * */
 	    return count >= amount; // does the player have the required amount
 	}
 	
