@@ -14,8 +14,6 @@ package com.live.macsephi;
 
 // watch the magic.. bye-bye warnings.
 
-import java.util.ListIterator;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -134,7 +132,15 @@ public class Mages implements CommandExecutor {
 	 */
 	private boolean checkForItem(Player player, Material material, int amount) {
 	    PlayerInventory inventory = player.getInventory();
+	    
+        // no inventory? definitely false. Not even sure if this is possible, but protected against NPE in case..
+	    if( inventory == null )
+	        return false;
+	    
 	    ItemStack[] items = inventory.getContents();
+        // no inventory? definitely false. Not even sure if this is possible, but protected against NPE in case..
+	    if( items == null )
+	        return false;
 
 	    int count=0;
 	    // loop through inventory looking for the requested material, add to count
