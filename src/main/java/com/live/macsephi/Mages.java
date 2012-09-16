@@ -14,6 +14,8 @@ package com.live.macsephi;
 
 // watch the magic.. bye-bye warnings.
 
+import java.util.ListIterator;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -134,7 +136,7 @@ public class Mages implements CommandExecutor {
 	private boolean checkForItem(Player player, Material material, int amount) {
 	    PlayerInventory inventory = player.getInventory();
 	    ItemStack[] items = inventory.getContents();
-	    
+
 	    int count=0;
 	    // loop through inventory looking for the requested material, add to count
 	    // as we find stacks of that material
@@ -146,7 +148,7 @@ public class Mages implements CommandExecutor {
 	        }
 	    }
 	    
-	    return count > amount; // does the player have the required amount
+	    return count >= amount; // does the player have the required amount
 	}
 	
 	/** Remove a given item/amount from the players inventory.
@@ -156,6 +158,29 @@ public class Mages implements CommandExecutor {
 	 * @param amount
 	 */
 	private void removeItem(Player player, Material material, int amount) {
-	    // TODO: fill in..
+        PlayerInventory inventory = player.getInventory();
+        ItemStack[] items = inventory.getContents();
+        
+        int count=amount;
+        // loop through inventory looking for the requested material, remove up
+        // to the requested amount until we are done.
+        for(int i=0; i < items.length; i++) {
+            ItemStack item = items[i];
+            Material mat = item.getType();
+            if( mat.equals(material) ) {
+                if( count >= item.getAmount() ) {    // remove full stack
+                    count -= item.getAmount();
+                    inventory.setItem(i,  null);
+                }
+                else {                              // just remove what we need
+                    item.setAmount(item.getAmount() - count);
+                    count = 0;
+                }
+            }
+            
+            // did we remove all of the requested items? If so, we're done. 
+            if( count == 0 )
+                break;
+        }
 	}
 }
