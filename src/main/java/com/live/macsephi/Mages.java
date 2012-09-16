@@ -31,7 +31,7 @@ import org.bukkit.inventory.PlayerInventory;
  *
  */
 public class Mages implements CommandExecutor {
-	private Frenz me;
+	private Frenz plugin;
 	//ItemStack curaAmmo = new ItemStack(Material.DIAMOND, 3);
 	//ItemStack curaOtherAmmo = new ItemStack(Material.DIAMOND, 4);
 	//ItemStack fullCureAmmo = new ItemStack(Material.DIAMOND, 5);
@@ -39,8 +39,9 @@ public class Mages implements CommandExecutor {
 	//ItemStack regenAmmo = new ItemStack(Material.EMERALD, 2);
 	//ItemStack regenOtherAmmo = new ItemStack(Material.EMERALD, 3);
 
+	// also, variable rename
 	public Mages(Frenz me) {
-		this.me = me;
+		this.plugin = me;
 	}
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -56,10 +57,10 @@ public class Mages implements CommandExecutor {
 		if ((command.getName().equalsIgnoreCase("cure"))) {
 		    PlayerInventory inv = player.getInventory();
 		    
-		    if (this.me.hasPluginPermission(player, "cure")) {
-		        if ((this.me.hasPluginPermission(player, "cure.other"))
+		    if (plugin.hasPluginPermission(player, "cure")) {
+		        if ((plugin.hasPluginPermission(player, "cure.other"))
 		                && (args.length == 1)) {
-		            Player target = this.me.getServer().getPlayer(args[0]);
+		            Player target = plugin.getServer().getPlayer(args[0]);
 		            if (target != player) {
 		                if (target == null) {
 		                    player.sendMessage(ChatColor.RED
