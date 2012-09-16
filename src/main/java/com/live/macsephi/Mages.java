@@ -21,7 +21,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 
 /** First I will do the same I did to the other class, so you can see how I work.
  * 
@@ -68,9 +67,8 @@ public class Mages implements CommandExecutor {
 		                    return true;
 		                }
 		                
-		                // check for required material and apply cost if they have it
-		                if( checkForItem(player, Material.DIAMOND, 2) ) {
-		                    removeItem(player, Material.DIAMOND, 2);
+		                if( player.getInventory().contains(Material.DIAMOND, 2) ) {   // do they have at least 2 diamonds?
+		                    player.getInventory().removeItem(new ItemStack(Material.DIAMOND, 2)); // remove the items
 		                    
 		                    if (target.getHealth() > 15)
 		                        target.setHealth(20);
@@ -93,10 +91,8 @@ public class Mages implements CommandExecutor {
 		                }
 		            }
 		        }
-
-		        // check for required material and apply cost if they have it
-	            if( checkForItem(player, Material.DIAMOND, 1) ) {
-	                removeItem(player, Material.DIAMOND, 1);
+		        else if( player.getInventory().contains(Material.DIAMOND, 1) ) {   // do they have at least 1 diamond?
+                    player.getInventory().removeItem(new ItemStack(Material.DIAMOND, 1)); // remove the items
 	                
 		            if (player.getHealth() > 15)
 		                player.setHealth(20);
@@ -121,77 +117,5 @@ public class Mages implements CommandExecutor {
 		}
 		
 		return true;
-	}
-	
-	/** Check to see if a player has a certain amount of a given material.
-	 * 
-	 * @param player
-	 * @param material
-	 * @param amount
-	 * @return true if the requested amount of material exists
-	 */
-	private boolean checkForItem(Player player, Material material, int amount) {
-	    PlayerInventory inventory = player.getInventory();
-	    
-        // no inventory? definitely false. Not even sure if this is possible, but protected against NPE in case..
-	    if( inventory == null )
-	        return false;
-	    
-	    ItemStack[] items = inventory.getContents();
-        // no inventory? definitely false. Not even sure if this is possible, but protected against NPE in case..
-	    if( items == null )
-	        return false;
-
-	    int count=0;
-	    // loop through inventory looking for the requested material, add to count
-	    // as we find stacks of that material
-	    for(int i=0; i < items.length; i++) {
-	        ItemStack item = items[i];
-	        Material mat = item.getType();
-	        if( mat.equals(material) ) {
-	            count += item.getAmount();
-	        }
-	    }
-	    /* Running the test as-as, I get an internal error when trying to use the /cure command:
-	     * Caused by: java.lang.NullPointerException
-        at com.live.macsephi.Mages.checkForItem(Mages.java:142)
-        at com.live.macsephi.Mages.onCommand(Mages.java:98)
-        at org.bukkit.command.PluginCommand.execute(PluginCommand.java:40)
-        ... 15 more
-	     * */
-	    return count >= amount; // does the player have the required amount
-	}
-	
-	/** Remove a given item/amount from the players inventory.
-	 * 
-	 * @param player
-	 * @param material
-	 * @param amount
-	 */
-	private void removeItem(Player player, Material material, int amount) {
-        PlayerInventory inventory = player.getInventory();
-        ItemStack[] items = inventory.getContents();
-        
-        int count=amount;
-        // loop through inventory looking for the requested material, remove up
-        // to the requested amount until we are done.
-        for(int i=0; i < items.length; i++) {
-            ItemStack item = items[i];
-            Material mat = item.getType();
-            if( mat.equals(material) ) {
-                if( count >= item.getAmount() ) {    // remove full stack
-                    count -= item.getAmount();
-                    inventory.setItem(i,  null);
-                }
-                else {                              // just remove what we need
-                    item.setAmount(item.getAmount() - count);
-                    count = 0;
-                }
-            }
-            
-            // did we remove all of the requested items? If so, we're done. 
-            if( count == 0 )
-                break;
-        }
 	}
 }
