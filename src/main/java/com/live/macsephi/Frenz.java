@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import net.minecraft.server.EntityLiving;
@@ -52,15 +53,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffectType;
 
-import com.live.macsephi.FrenzListener;
 import com.live.macsephi.Admin.BoomExecutor;
 import com.live.macsephi.Admin.KitExecutor;
 import com.live.macsephi.Admin.ReloadFrenzCommand;
 import com.live.macsephi.Admin.ShutUpCommand;
-import com.live.macsephi.Workers;
-import com.live.macsephi.Heroes;
-import com.live.macsephi.Mages;
 import com.live.macsephi.MiscCommands.CureMoreCommand;
 import com.live.macsephi.MiscCommands.CurseCommand;
 import com.live.macsephi.MiscCommands.DistortCommand;
@@ -69,7 +67,6 @@ import com.live.macsephi.MiscCommands.FullRestoreCommand;
 import com.live.macsephi.MiscCommands.OffCommand;
 import com.live.macsephi.MiscCommands.SliceCommand;
 import com.live.macsephi.MiscCommands.SuperDistortCommand;
-import com.live.macsephi.Thieves;
 
 public class Frenz extends JavaPlugin {
     private static final String PERMISSION_BASE = "Frenz.";
@@ -79,33 +76,33 @@ public class Frenz extends JavaPlugin {
     public FileConfiguration config;
     private File configFile;
     protected boolean disableFireCharges;
-    public ArrayList<TNTPrimed> tntPrimed = new ArrayList<TNTPrimed>();
-    public ArrayList<TNTPrimed> napalm = new ArrayList<TNTPrimed>();
-    public ArrayList<Player> Shield = new ArrayList<Player>();
-    public ArrayList<Player> dBetter = new ArrayList<Player>();
-    public ArrayList<Player> dSuper = new ArrayList<Player>();
-    public ArrayList<Player> dHyper = new ArrayList<Player>();
-    public ArrayList<Player> dGod = new ArrayList<Player>();
-    public ArrayList<Player> dDivine = new ArrayList<Player>();
-    public ArrayList<Player> Miner = new ArrayList<Player>();
-    public ArrayList<Player> mBetter = new ArrayList<Player>();
-    public ArrayList<Player> mSuper = new ArrayList<Player>();
-    public ArrayList<Player> mHyper = new ArrayList<Player>();
-    public ArrayList<Player> mGod = new ArrayList<Player>();
-    public ArrayList<Player> mDivine = new ArrayList<Player>();
-    public ArrayList<Player> bBrawn = new ArrayList<Player>();
-    public ArrayList<Player> bBetter = new ArrayList<Player>();
-    public ArrayList<Player> bSuper = new ArrayList<Player>();
-    public ArrayList<Player> bHyper = new ArrayList<Player>();
-    public ArrayList<Player> bGod = new ArrayList<Player>();
-    public ArrayList<Player> bDivine = new ArrayList<Player>();
-    public ArrayList<Player> sDivine = new ArrayList<Player>();
-    public ArrayList<Player> sGod = new ArrayList<Player>();
-    public ArrayList<Player> sHyper = new ArrayList<Player>();
-    public ArrayList<Player> sSuper = new ArrayList<Player>();
-    public ArrayList<Player> sHi = new ArrayList<Player>();
-    public ArrayList<Player> sSpeed = new ArrayList<Player>();
-    public ArrayList<Player> DeathStrike = new ArrayList<Player>();
+    public List<TNTPrimed> tntPrimed = new ArrayList<TNTPrimed>();
+    public List<TNTPrimed> napalm = new ArrayList<TNTPrimed>();
+    public List<Player> Shield = new ArrayList<Player>();
+    public List<Player> dBetter = new ArrayList<Player>();
+    public List<Player> dSuper = new ArrayList<Player>();
+    public List<Player> dHyper = new ArrayList<Player>();
+    public List<Player> dGod = new ArrayList<Player>();
+    public List<Player> dDivine = new ArrayList<Player>();
+    public List<Player> Miner = new ArrayList<Player>();
+    public List<Player> mBetter = new ArrayList<Player>();
+    public List<Player> mSuper = new ArrayList<Player>();
+    public List<Player> mHyper = new ArrayList<Player>();
+    public List<Player> mGod = new ArrayList<Player>();
+    public List<Player> mDivine = new ArrayList<Player>();
+    public List<Player> bBrawn = new ArrayList<Player>();
+    public List<Player> bBetter = new ArrayList<Player>();
+    public List<Player> bSuper = new ArrayList<Player>();
+    public List<Player> bHyper = new ArrayList<Player>();
+    public List<Player> bGod = new ArrayList<Player>();
+    public List<Player> bDivine = new ArrayList<Player>();
+    public List<Player> sDivine = new ArrayList<Player>();
+    public List<Player> sGod = new ArrayList<Player>();
+    public List<Player> sHyper = new ArrayList<Player>();
+    public List<Player> sSuper = new ArrayList<Player>();
+    public List<Player> sHi = new ArrayList<Player>();
+    public List<Player> sSpeed = new ArrayList<Player>();
+    public List<Player> DeathStrike = new ArrayList<Player>();
     
     public List<Player> isMuted = Collections.synchronizedList(new ArrayList<Player>());
 
@@ -243,4 +240,69 @@ public class Frenz extends JavaPlugin {
 		} catch (Exception localException) {
 		}
 	}
+	
+    /* Storage format is:
+     *   { playerNameA =>
+     *       { effectType1 => schedulerId,
+     *         effectType2 => schedulerId },
+     *     playerNameB =>
+     *       { effectType1 => schedulerId }
+     *   }
+     */
+    private final Map<String, Map<PotionEffectType, Integer>> tasks = new HashMap<String, Map<PotionEffectType, Integer>>();
+    
+	/** Add a timeout for a given effect. Keep track of the timeout so we can cancel
+	 * it prematurely if we want to.
+     * 
+     * @param player the player the timer is for
+     * @param type the PotionEffect to be removed when the timer fires
+     * @param delay how many ticks until the timer fires
+     * @param trackingList a list to remove the player from when the timer fires (optional, can be null)
+     * @param timeoutMessage a message to send the player when the timeout fires (optional, can be null)
+     */
+    public void addEffectTimeout(final Player player, final PotionEffectType type, final int delay,
+            final List<Player> trackingList, final String timeoutMessage)
+    {
+        int id = getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            public void run() {
+                player.removePotionEffect(type);    // remove the effect
+                cancelTimeout(player, type);        // cleanup the timer
+
+                // remove them from the list, if there is one
+                if( trackingList != null )
+                    trackingList.remove(player);
+
+                // send the message, if there is one
+                if( timeoutMessage != null )
+                    player.sendMessage(timeoutMessage);
+            }
+        }, delay);
+        
+        // get playerMap, or create new one if none exists
+        Map<PotionEffectType, Integer> playerMap = tasks.get(player.getName());
+        if( playerMap == null ) {
+            playerMap = new HashMap<PotionEffectType, Integer>();
+            tasks.put(player.getName(), playerMap);     // store the new map
+        }
+        
+        playerMap.put(type, id);    // store the scheduleId
+    }
+    
+    /** Cancel a scheduled timer and cleanup the hash.
+     * 
+     * @param player
+     * @param type
+     */
+    public void cancelTimeout(final Player player, final PotionEffectType type) {
+        Map<PotionEffectType, Integer> playerMap = tasks.get(player.getName());
+
+        if( playerMap == null ) // don't do anything if we weren't tracking any tasks for this player
+            return;
+        
+        Integer id = playerMap.remove(type);    // cleanup the timer from the hash
+        if( id != null ) {
+            getServer().getScheduler().cancelTask(id);  // cancel the Bukkit scheduled task
+        }
+    }
+
 }
