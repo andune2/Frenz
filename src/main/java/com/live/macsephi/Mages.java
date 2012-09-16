@@ -12,6 +12,8 @@
 
 package com.live.macsephi;
 
+// watch the magic.. bye-bye warnings.
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -21,10 +23,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import com.live.macsephi.Frenz;
-
+/** First I will do the same I did to the other class, so you can see how I work.
+ * 
+ *  Oh only one if/else here..  oh well will do the same anyway.
+ * 
+ * @author morganm
+ *
+ */
 public class Mages implements CommandExecutor {
-	private Player player;
 	private Frenz me;
 	//ItemStack curaAmmo = new ItemStack(Material.DIAMOND, 3);
 	//ItemStack curaOtherAmmo = new ItemStack(Material.DIAMOND, 4);
@@ -37,72 +43,118 @@ public class Mages implements CommandExecutor {
 		this.me = me;
 	}
 
-	public boolean onCommand(CommandSender sender, Command command,
-			String label, String[] args) {
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+	    Player player = null;
+	    if( !(sender instanceof Player) ) {
+            sender.sendMessage("Only players may use this command");   // tell console to buzz off
+            return false;
+	    }
+	    else {
+	        player = (Player) sender;
+	    }
+	    
 		if ((command.getName().equalsIgnoreCase("cure"))) {
-			if ((sender instanceof Player)) {
-				this.player = ((Player) sender);
-				PlayerInventory inv = player.getInventory();
-				ItemStack cureAmmo = new ItemStack(Material.DIAMOND, 1);
-				ItemStack cureOtherAmmo = new ItemStack(Material.DIAMOND, 2);
-				if (this.me.hasPluginPermission(player, "cure")) {
-					if ((this.me.hasPluginPermission(player, "cure.other"))
-							&& (args.length == 1)) {
-						Player target = this.me.getServer().getPlayer(args[0]);
-						if (target != player) {
-							if (target == null) {
-								player.sendMessage(ChatColor.RED
-										+ "Specified Player is invalid! (offline, non-existent," +
-										" or improperly typed)");
-								return false;
-							}
-							if (inv.contains(cureOtherAmmo)) {
-								if (target.getHealth() > 15)
-									target.setHealth(20);
-								else {
-									target.setHealth(target.getHealth() + 5);
-								}
-								inv.removeItem(cureOtherAmmo);
-								target.sendMessage(ChatColor.GREEN
-										+"P"+ChatColor.DARK_GREEN + "layer " + player.getName() +" has cast Cure on you!");
-								target.sendMessage(ChatColor.DARK_BLUE + "["+ChatColor.AQUA+"RES"+ChatColor.GRAY+" Lvl "+ChatColor.GREEN+
-										"1"+ChatColor.DARK_BLUE+"]");
-								this.player.sendMessage(ChatColor.GREEN
-										+"Y"+ChatColor.DARK_GREEN + "ou have cast Cure on " + target.getName() +"!");
-								this.player.sendMessage(ChatColor.DARK_BLUE + "["+ChatColor.AQUA+"RES"+ChatColor.GRAY+" Lvl "+ChatColor.GREEN+
-										"1"+ChatColor.DARK_BLUE+"]");
-								return true;
-							}
-							this.player.sendMessage(ChatColor.DARK_RED
-									+"Y"+ChatColor.RED+"ou must have at least 2 Diamonds in your " +
-									"inventory in order to cast Cure on someone else.");
-							return false;
-						}
-					}
-					if (inv.contains(cureAmmo)) {
-						if (player.getHealth() > 15)
-							player.setHealth(20);
-						else {
-							player.setHealth(player.getHealth() + 5);
-						}
-						inv.removeItem(cureAmmo);
-						this.player.sendMessage(ChatColor.GREEN
-								+"Y"+ChatColor.DARK_GREEN + "ou have cast Cure on yourself!");
-						this.player.sendMessage(ChatColor.DARK_BLUE + "["+ChatColor.AQUA+"RES"+ChatColor.GRAY+" Lvl "+ChatColor.GREEN+
-								"1"+ChatColor.DARK_BLUE+"]");
-						return true;
-					}
-					this.player.sendMessage(ChatColor.DARK_RED
-							+"Y"+ChatColor.RED+"ou must have at least 1 Diamond in your " +
-							"inventory in order to cast Cure on yourself.");
-					return false;
-				}
-				this.player.sendMessage(ChatColor.DARK_RED
-						+"Y"+ChatColor.RED+"ou either need to join the Mage's Guild," +
-						" or earn a higher rank within it.");
-			}
-			return false;
+		    PlayerInventory inv = player.getInventory();
+		    
+		    if (this.me.hasPluginPermission(player, "cure")) {
+		        if ((this.me.hasPluginPermission(player, "cure.other"))
+		                && (args.length == 1)) {
+		            Player target = this.me.getServer().getPlayer(args[0]);
+		            if (target != player) {
+		                if (target == null) {
+		                    player.sendMessage(ChatColor.RED
+		                            + "Specified Player is invalid! (offline, non-existent," +
+		                            " or improperly typed)");
+		                    return true;
+		                }
+		                
+		                // check for required material and apply cost if they have it
+		                if( checkForItem(player, Material.DIAMOND, 2) ) {
+		                    removeItem(player, Material.DIAMOND, 2);
+		                    
+		                    if (target.getHealth() > 15)
+		                        target.setHealth(20);
+		                    else {
+		                        target.setHealth(target.getHealth() + 5);
+		                    }
+		                    target.sendMessage(ChatColor.GREEN
+		                            +"P"+ChatColor.DARK_GREEN + "layer " + player.getName() +" has cast Cure on you!");
+		                    target.sendMessage(ChatColor.DARK_BLUE + "["+ChatColor.AQUA+"RES"+ChatColor.GRAY+" Lvl "+ChatColor.GREEN+
+		                            "1"+ChatColor.DARK_BLUE+"]");
+		                    player.sendMessage(ChatColor.GREEN
+		                            +"Y"+ChatColor.DARK_GREEN + "ou have cast Cure on " + target.getName() +"!");
+		                    player.sendMessage(ChatColor.DARK_BLUE + "["+ChatColor.AQUA+"RES"+ChatColor.GRAY+" Lvl "+ChatColor.GREEN+
+		                            "1"+ChatColor.DARK_BLUE+"]");
+		                }
+		                else {
+    		                player.sendMessage(ChatColor.DARK_RED
+    		                        +"Y"+ChatColor.RED+"ou must have at least 2 Diamonds in your " +
+    		                        "inventory in order to cast Cure on someone else.");
+		                }
+		            }
+		        }
+
+		        // check for required material and apply cost if they have it
+	            if( checkForItem(player, Material.DIAMOND, 1) ) {
+	                removeItem(player, Material.DIAMOND, 1);
+	                
+		            if (player.getHealth() > 15)
+		                player.setHealth(20);
+		            else {
+		                player.setHealth(player.getHealth() + 5);
+		            }
+		            
+		            player.sendMessage(ChatColor.GREEN
+		                    +"Y"+ChatColor.DARK_GREEN + "ou have cast Cure on yourself!");
+		            player.sendMessage(ChatColor.DARK_BLUE + "["+ChatColor.AQUA+"RES"+ChatColor.GRAY+" Lvl "+ChatColor.GREEN+
+		                    "1"+ChatColor.DARK_BLUE+"]");
+		        }
+	            else {
+    		        player.sendMessage(ChatColor.DARK_RED
+    		                +"Y"+ChatColor.RED+"ou must have at least 1 Diamond in your " +
+    		                "inventory in order to cast Cure on yourself.");
+	            }
+		    }
+		    player.sendMessage(ChatColor.DARK_RED
+		            +"Y"+ChatColor.RED+"ou either need to join the Mage's Guild," +
+		            " or earn a higher rank within it.");
 		}
-		return false;
+		
+		return true;
+	}
+	
+	/** Check to see if a player has a certain amount of a given material.
+	 * 
+	 * @param player
+	 * @param material
+	 * @param amount
+	 * @return true if the requested amount of material exists
+	 */
+	private boolean checkForItem(Player player, Material material, int amount) {
+	    PlayerInventory inventory = player.getInventory();
+	    ItemStack[] items = inventory.getContents();
+	    
+	    int count=0;
+	    // loop through inventory looking for the requested material, add to count
+	    // as we find stacks of that material
+	    for(int i=0; i < items.length; i++) {
+	        ItemStack item = items[i];
+	        Material mat = item.getType();
+	        if( mat.equals(material) ) {
+	            count += item.getAmount();
+	        }
+	    }
+	    
+	    return count > amount; // does the player have the required amount
+	}
+	
+	/** Remove a given item/amount from the players inventory.
+	 * 
+	 * @param player
+	 * @param material
+	 * @param amount
+	 */
+	private void removeItem(Player player, Material material, int amount) {
+	    // TODO: fill in..
 	}
 }
